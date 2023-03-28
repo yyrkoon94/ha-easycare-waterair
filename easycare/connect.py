@@ -24,20 +24,24 @@ class Connect:
         self._config = config
         self._bearer = TEMP_BEARER  # None
         self._bearer_timeout = 0  # time.time()
+        self._isConnected = False
 
     def login(self) -> bool:
         """Login to Easy-Care and Store the Bearer"""
         if self.check_bearer() is True:
             _LOGGER.debug("Bearer is defined, no need to login !")
+            self._isConnected = True
             return True
 
         _LOGGER.debug("Bearer is expired or not set, calling login api")
         user = self.easycare_login()
         if user is False:
+            self._isConnected = False
             return False
 
         self._bearer = user["access_token"]
         self._bearer_timeout = time.time() + user["expires_in"]
+        self._isConnected = True
         return True
 
     def check_bearer(self) -> bool:
@@ -94,3 +98,7 @@ class Connect:
 
         _LOGGER.debug("Authentication done !")
         return json.loads(login.content)
+
+    def connecton_status(self) -> bool:
+        """Return the connextion status for Easy-Care"""
+        return self._isConnected

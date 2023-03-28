@@ -19,3 +19,7 @@ class EasyCare:
     def connect(self) -> bool:
         """Call the connect api for the first login"""
         return self._connect.login()
+
+    def connecton_status(self) -> bool:
+        """Return the connextion status for Easy-Care"""
+        return self._connect.connecton_status()

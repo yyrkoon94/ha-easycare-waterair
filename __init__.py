@@ -8,9 +8,7 @@ easycare_waterair:
 """
 from __future__ import annotations
 import json
-import time
 import logging
-import requests
 
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
@@ -31,8 +29,6 @@ COMPONENT_DATA = "easycare_waterair-data"
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up a skeleton component."""
     _LOGGER.debug("Start EasyCare component initialisation")
-    # States are in the format DOMAIN.OBJECT_ID.
-    hass.states.async_set("easycare_waterair.Connected", "Works!")
 
     # Read config
     conf = config[DOMAIN]
@@ -43,16 +39,13 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     # Return boolean to indicate that initialization was successfully.
     # user = connect_easycare(hass, config)
     if connected is False:
-        hass.states.async_set("easycare_waterair.Connected", "Unable to connect :(")
         return False
-
-    hass.states.async_set("easycare_waterair.Connected", "Connected !")
 
     _LOGGER.debug("End EasyCare component initialisation")
     return True
 
 
-def connect_easycare(hass, config) -> json:
+def connect_easycare(hass: HomeAssistant, config) -> json:
     """Connect to easycare"""
     # Read config
     username = config.get(CONF_USERNAME)
