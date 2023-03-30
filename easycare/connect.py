@@ -65,6 +65,7 @@ class Connect:
             "Content-Type": "application/json",
             "User-Agent": "connected-pool-waterair/2.4.6 (iPad; iOS 16.3; Scale/2.00)",
             "authorization": "Basic " + self._config.easycare_key,
+            "accept": "version=2.5",
         }
 
         attempt = 0
@@ -117,6 +118,7 @@ class Connect:
             "Content-Type": "application/json",
             "User-Agent": "connected-pool-waterair/2.4.6 (iPad; iOS 16.3; Scale/2.00)",
             "authorization": "Bearer " + self._bearer,
+            "accept": "version=2.5",
         }
 
         attempt = 0

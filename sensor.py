@@ -77,6 +77,7 @@ class StaticPoolDetail(SensorEntity):
                 "pool_longitude": pool.longitude,
                 "pool_latitude": pool.latitude,
                 "pool_custom_photo": pool.custom_photo,
+                "pool_volume": pool.volume,
             }
         else:
             self._attr_available = False

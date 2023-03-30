@@ -26,7 +26,7 @@ class EasyCareCoordinator(DataUpdateCoordinator):
             # Name of the data. For logging purposes.
             name="EasyCare_Cooridnator",
             # Polling interval. Will only be polled if there are subscribers.
-            update_interval=timedelta(seconds=60),
+            update_interval=timedelta(seconds=10),
         )
         self._cfg = config
         self._connect = connect
