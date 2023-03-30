@@ -1,0 +1,1187 @@
+{
+    "userGroups": [
+        {
+            "code": "customer",
+            "name": "client",
+            "description": "Clients",
+            "createdAt": "2019-06-05T06:53:13.158Z",
+            "updatedAt": "2023-03-28T16:25:10.258Z",
+            "id": "5cf766d9ee81333550ec8376"
+        }
+    ],
+    "modules": [
+        {
+            "serialNumber": "94000306C91A0007",
+            "uuid": "940058B96106C91A000000070006C91A",
+            "name": "AC1-06C91A",
+            "manufacturerType": "94",
+            "batteryVoltage": 50,
+            "rssi": 1,
+            "softwareVersion": "6.2.29",
+            "owner": "5f154365a4a3a86708aadbf7",
+            "type": "lr-mas",
+            "numberOfInputs": 3,
+            "powerSourceType": 2,
+            "macAddress": "C8:B9:61:06:C9:1A",
+            "batteryLow": false,
+            "batteryAlarm": false,
+            "clockAlarm": false,
+            "sensorState": false,
+            "inputsUpdatedAt": "2020-10-25T09:26:38.844Z",
+            "programmationType": 0,
+            "SMSQuotaSendByDay": 4,
+            "SMSQuotaSendByMonth": 30,
+            "phoneNumberLock": 0,
+            "createdAt": "2020-11-01T10:38:19.850Z",
+            "updatedAt": "2023-03-28T00:39:04.481Z",
+            "programmingUpdatedAt": null,
+            "battery": 3,
+            "lastRadioCommunication": "2023-03-28T00:38:17.000Z",
+            "defaultName": "AC1-06C91A",
+            "winteringState": false,
+            "relay": "5f9e901bc4efafea3a113129",
+            "firmwareUpdateFrequency": "always",
+            "addressWeather": {
+                "cityName": "Villiers-sur-Marne",
+                "departementName": "Val-de-Marne",
+                "departementCode": 94,
+                "countryName": "France",
+                "countryCode": "FR"
+            },
+            "latitude": 48.82859393065251,
+            "locationKey": "133757",
+            "longitude": 2.5393177587918516,
+            "address": "21 Rue Maurice Berteaux, Villiers-sur-Marne Île-de-France",
+            "weatherForecast": {
+                "Headline": {
+                    "EffectiveDate": "2023-03-31T02:00:00+02:00",
+                    "EffectiveEpochDate": 1680220800,
+                    "Severity": 4,
+                    "Text": "Pluies intermittentes attendues de jeudi tard la nuit jusqu'à vendredi soir",
+                    "Category": "rain",
+                    "EndDate": "2023-04-01T02:00:00+02:00",
+                    "EndEpochDate": 1680307200,
+                    "MobileLink": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?unit=c",
+                    "Link": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?unit=c"
+                },
+                "DailyForecasts": [
+                    {
+                        "Date": "2023-03-27T07:00:00+02:00",
+                        "EpochDate": 1679893200,
+                        "Sun": {
+                            "Rise": "2023-03-27T07:39:00+02:00",
+                            "EpochRise": 1679895540,
+                            "Set": "2023-03-27T20:13:00+02:00",
+                            "EpochSet": 1679940780
+                        },
+                        "Moon": {
+                            "Rise": "2023-03-27T10:15:00+02:00",
+                            "EpochRise": 1679904900,
+                            "Set": "2023-03-28T03:33:00+02:00",
+                            "EpochSet": 1679967180,
+                            "Phase": "WaxingCrescent",
+                            "Age": 6
+                        },
+                        "Temperature": {
+                            "Minimum": {
+                                "Value": 1,
+                                "Unit": "C",
+                                "UnitType": 17
+                            },
+                            "Maximum": {
+                                "Value": 11,
+                                "Unit": "C",
+                                "UnitType": 17
+                            }
+                        },
+                        "RealFeelTemperature": {
+                            "Minimum": {
+                                "Value": -0.4,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Froid"
+                            },
+                            "Maximum": {
+                                "Value": 10.1,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Assez frais"
+                            }
+                        },
+                        "RealFeelTemperatureShade": {
+                            "Minimum": {
+                                "Value": -0.4,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Froid"
+                            },
+                            "Maximum": {
+                                "Value": 8,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Assez frais"
+                            }
+                        },
+                        "HoursOfSun": 6.1,
+                        "DegreeDaySummary": {
+                            "Heating": {
+                                "Value": 12,
+                                "Unit": "C",
+                                "UnitType": 17
+                            },
+                            "Cooling": {
+                                "Value": 0,
+                                "Unit": "C",
+                                "UnitType": 17
+                            }
+                        },
+                        "AirAndPollen": [
+                            {
+                                "Name": "AirQuality",
+                                "Value": 0,
+                                "Category": "Bon",
+                                "CategoryValue": 1,
+                                "Type": "Ozone"
+                            },
+                            {
+                                "Name": "Grass",
+                                "Value": 0,
+                                "Category": "Bon",
+                                "CategoryValue": 1
+                            },
+                            {
+                                "Name": "Mold",
+                                "Value": 24072,
+                                "Category": "Malsain (p. sensibles)",
+                                "CategoryValue": 3
+                            },
+                            {
+                                "Name": "Ragweed",
+                                "Value": 0,
+                                "Category": "Bon",
+                                "CategoryValue": 1
+                            },
+                            {
+                                "Name": "Tree",
+                                "Value": 53,
+                                "Category": "Modéré",
+                                "CategoryValue": 2
+                            },
+                            {
+                                "Name": "UVIndex",
+                                "Value": 4,
+                                "Category": "Modéré",
+                                "CategoryValue": 2
+                            }
+                        ],
+                        "Day": {
+                            "Icon": 14,
+                            "IconPhrase": "Partiellement ensoleillé - averses",
+                            "HasPrecipitation": true,
+                            "PrecipitationType": "Rain",
+                            "PrecipitationIntensity": "Light",
+                            "ShortPhrase": "Nuages et soleil",
+                            "LongPhrase": "Nuages et soleil",
+                            "PrecipitationProbability": 55,
+                            "ThunderstormProbability": 11,
+                            "RainProbability": 55,
+                            "SnowProbability": 0,
+                            "IceProbability": 0,
+                            "Wind": {
+                                "Speed": {
+                                    "Value": 16.7,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 352,
+                                    "Localized": "N",
+                                    "English": "N"
+                                }
+                            },
+                            "WindGust": {
+                                "Speed": {
+                                    "Value": 37,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 360,
+                                    "Localized": "N",
+                                    "English": "N"
+                                }
+                            },
+                            "TotalLiquid": {
+                                "Value": 0.5,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Rain": {
+                                "Value": 0.5,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Snow": {
+                                "Value": 0,
+                                "Unit": "cm",
+                                "UnitType": 4
+                            },
+                            "Ice": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "HoursOfPrecipitation": 0.5,
+                            "HoursOfRain": 0.5,
+                            "HoursOfSnow": 0,
+                            "HoursOfIce": 0,
+                            "CloudCover": 54,
+                            "Evapotranspiration": {
+                                "Value": 2,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "SolarIrradiance": {
+                                "Value": 4389.9,
+                                "Unit": "W/m²",
+                                "UnitType": 33
+                            }
+                        },
+                        "Night": {
+                            "Icon": 36,
+                            "IconPhrase": "Passages nuageux",
+                            "HasPrecipitation": false,
+                            "ShortPhrase": "En partie couvert et frais",
+                            "LongPhrase": "En partie couvert et frais",
+                            "PrecipitationProbability": 3,
+                            "ThunderstormProbability": 0,
+                            "RainProbability": 2,
+                            "SnowProbability": 1,
+                            "IceProbability": 0,
+                            "Wind": {
+                                "Speed": {
+                                    "Value": 9.3,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 92,
+                                    "Localized": "E",
+                                    "English": "E"
+                                }
+                            },
+                            "WindGust": {
+                                "Speed": {
+                                    "Value": 18.5,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 23,
+                                    "Localized": "NNE",
+                                    "English": "NNE"
+                                }
+                            },
+                            "TotalLiquid": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Rain": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Snow": {
+                                "Value": 0,
+                                "Unit": "cm",
+                                "UnitType": 4
+                            },
+                            "Ice": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "HoursOfPrecipitation": 0,
+                            "HoursOfRain": 0,
+                            "HoursOfSnow": 0,
+                            "HoursOfIce": 0,
+                            "CloudCover": 48,
+                            "Evapotranspiration": {
+                                "Value": 0.3,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "SolarIrradiance": {
+                                "Value": 28.5,
+                                "Unit": "W/m²",
+                                "UnitType": 33
+                            }
+                        },
+                        "Sources": [
+                            "AccuWeather "
+                        ],
+                        "MobileLink": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?day=1&unit=c",
+                        "Link": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?day=1&unit=c"
+                    }
+                ]
+            },
+            "status": {},
+            "waitingForStatusUpdate": false,
+            "id": "5f9e901b19b88cb10766c724",
+            "isOnline": false,
+            "hasPrograms": false,
+            "getClientCodeFromSerialNumber": 7,
+            "weatherForecastDisplay": false,
+            "photo": "/images/modules/photo-lr-mas-512x512.png",
+            "customPhoto": "/images/modules/photo-lr-mas-512x512.png",
+            "isHttpV2": true,
+            "typeIsCellularRelay": false,
+            "isInternetAccessibleThroughLongPolling": true,
+            "platformEventOnSetData": false,
+            "isBluetoothOnly": false,
+            "typeIsLoraChild": false,
+            "typeIsLoraWan": false,
+            "typeIsLrms": false,
+            "typeIsLrag": false,
+            "typeIsLrbst": false,
+            "typeIsLrmv": false,
+            "typeIsRelay": false,
+            "typeIsSensor": true,
+            "typeIsPoolProduct": true,
+            "typeIsPoolProductOnly": true,
+            "typeIsPressureAnalyzer": false,
+            "typeIsLighting": false,
+            "typeIsWatering": false,
+            "typeIsTurfWatering": false,
+            "typeIsLinkable": false,
+            "typeIsAutomaticWaterBudgetCompatible": false,
+            "typeIsGeotracking": false,
+            "typeIsPoolAutomation": false,
+            "typeIsAgricultural": false,
+            "isBluetooth": false,
+            "isV6BluetoothDevice": false,
+            "isWifi": false,
+            "isBattery": true,
+            "isClusterCompatible": false,
+            "getPowerSourceTypeName": "4 Piles AAA",
+            "getDisplayType": "lr-mas",
+            "getBatteryLevel": 3,
+            "isProgrammationTypeConfigurable": false,
+            "isTransferable": false,
+            "isPowerSourceTypeRechargeable": false,
+            "getTimeBeforeDisconnected": 720,
+            "isInAgriculturalModuleGroup": false,
+            "isInWateringModuleGroup": false,
+            "usesBusConnectedSensors": false,
+            "stationsName": [],
+            "inputs": [
+                {
+                    "lowThreshold": null,
+                    "interval": 30,
+                    "index": 1,
+                    "name": "Sonde température",
+                    "type": 5,
+                    "unit": 2,
+                    "highThreshold": null,
+                    "expression": "x/100.0",
+                    "expressionInverse": "x*100.0",
+                    "module": "5f9e901b19b88cb10766c724",
+                    "pushAlert": true,
+                    "mailAlert": true,
+                    "isLastMeasureBeyondThresholds": false,
+                    "createdAt": "2020-11-01T10:38:19.857Z",
+                    "updatedAt": "2023-03-28T14:26:21.656Z",
+                    "realyUpdated": false,
+                    "id": "5f9e901b19b88cb10766c726",
+                    "typeIsCumulativeData": false,
+                    "isBusConnectedSensor": false,
+                    "getPicto": "/images/dashboard/dashboard_temperature.svg",
+                    "getName": "Sonde température"
+                },
+                {
+                    "expressionInverse": "x*100.0",
+                    "name": "phMeter",
+                    "expression": "x/100.0",
+                    "type": 6,
+                    "interval": 30,
+                    "unit": 4,
+                    "highThreshold": null,
+                    "lowThreshold": null,
+                    "index": 2,
+                    "module": "5f9e901b19b88cb10766c724",
+                    "pushAlert": true,
+                    "mailAlert": true,
+                    "isLastMeasureBeyondThresholds": false,
+                    "createdAt": "2020-11-01T10:38:19.858Z",
+                    "updatedAt": "2023-03-28T14:26:21.621Z",
+                    "lastCalibratedAt": "2022-04-16T08:03:44.220Z",
+                    "realyUpdated": false,
+                    "hasFaultyProbe": false,
+                    "id": "5f9e901b19b88cb10766c727",
+                    "typeIsCumulativeData": false,
+                    "isBusConnectedSensor": false,
+                    "getPicto": "/images/dashboard/dashboard_ph.svg",
+                    "getName": "phMeter"
+                },
+                {
+                    "unit": 5,
+                    "interval": 30,
+                    "index": 3,
+                    "lowThreshold": null,
+                    "expression": "x",
+                    "highThreshold": null,
+                    "name": "Capteur Redox",
+                    "type": 7,
+                    "expressionInverse": "x",
+                    "module": "5f9e901b19b88cb10766c724",
+                    "pushAlert": true,
+                    "mailAlert": true,
+                    "isLastMeasureBeyondThresholds": false,
+                    "createdAt": "2020-11-01T10:38:19.858Z",
+                    "updatedAt": "2023-03-28T14:26:21.621Z",
+                    "realyUpdated": false,
+                    "id": "5f9e901b19b88cb10766c728",
+                    "typeIsCumulativeData": false,
+                    "isBusConnectedSensor": false,
+                    "getPicto": "/images/dashboard/dashboard_redox.svg",
+                    "getName": "Capteur Redox"
+                }
+            ],
+            "outputs": []
+        },
+        {
+            "serialNumber": "06000006E83D0007",
+            "softwareVersion": "6.1.63",
+            "rssi": 1,
+            "name": "WATBOX-06E83D",
+            "batteryVoltage": null,
+            "manufacturerType": "06",
+            "uuid": "060058B96106E83D000000070006E83D",
+            "owner": "5f154365a4a3a86708aadbf7",
+            "type": "lr-bst-compact",
+            "numberOfInputs": 0,
+            "powerSourceType": 3,
+            "macAddress": "C8:B9:61:06:E8:3D",
+            "batteryLow": false,
+            "batteryAlarm": false,
+            "clockAlarm": false,
+            "sensorState": false,
+            "inputsUpdatedAt": "2020-10-30T17:00:10.520Z",
+            "programmationType": 0,
+            "SMSQuotaSendByDay": 4,
+            "SMSQuotaSendByMonth": 30,
+            "phoneNumberLock": 0,
+            "createdAt": "2020-11-01T10:38:19.409Z",
+            "updatedAt": "2022-07-27T06:03:53.828Z",
+            "programmingUpdatedAt": null,
+            "seenAt": "2023-03-28T16:57:01.020Z",
+            "defaultName": "WATBOX-06E83D",
+            "firmwareUpdateFrequency": "never",
+            "addressWeather": {
+                "cityName": "Villiers-sur-Marne",
+                "departementName": "Val-de-Marne",
+                "departementCode": 94,
+                "countryName": "France",
+                "countryCode": "FR"
+            },
+            "latitude": 48.82859393065251,
+            "locationKey": "133757",
+            "longitude": 2.5393177587918516,
+            "address": "21 Rue Maurice Berteaux, Villiers-sur-Marne Île-de-France",
+            "weatherForecast": {
+                "0": {
+                    "period": "today",
+                    "Date": "2022-07-27T07:00:00+02:00",
+                    "Day": {
+                        "Icon": 4,
+                        "IconPhrase": "Passages nuageux",
+                        "Rain": {
+                            "Value": 0
+                        }
+                    },
+                    "Night": {
+                        "Icon": 36,
+                        "IconPhrase": "Passages nuageux",
+                        "Rain": {
+                            "Value": 0
+                        }
+                    },
+                    "Temperature": {
+                        "Minimum": {
+                            "Value": 15.8
+                        },
+                        "Maximum": {
+                            "Value": 25.3
+                        }
+                    }
+                },
+                "1": {
+                    "period": "tomorrow",
+                    "Date": "2022-07-28T07:00:00+02:00",
+                    "Day": {
+                        "Icon": 6,
+                        "IconPhrase": "Plutôt nuageux",
+                        "Rain": {
+                            "Value": 0
+                        }
+                    },
+                    "Night": {
+                        "Icon": 35,
+                        "IconPhrase": "Partiellement nuageux",
+                        "Rain": {
+                            "Value": 0
+                        }
+                    },
+                    "Temperature": {
+                        "Minimum": {
+                            "Value": 17.4
+                        },
+                        "Maximum": {
+                            "Value": 26.4
+                        }
+                    }
+                },
+                "2": {
+                    "period": "dayAfterTomorrow",
+                    "Date": "2022-07-29T07:00:00+02:00",
+                    "Day": {
+                        "Icon": 3,
+                        "IconPhrase": "Partiellement ensoleillé",
+                        "Rain": {
+                            "Value": 0
+                        }
+                    },
+                    "Night": {
+                        "Icon": 33,
+                        "IconPhrase": "Ciel dégagé",
+                        "Rain": {
+                            "Value": 0
+                        }
+                    },
+                    "Temperature": {
+                        "Minimum": {
+                            "Value": 17.4
+                        },
+                        "Maximum": {
+                            "Value": 28.3
+                        }
+                    }
+                },
+                "weatherForecastMissing": 1
+            },
+            "id": "5f9e901bc4efafea3a113129",
+            "isOnline": true,
+            "hasPrograms": false,
+            "getClientCodeFromSerialNumber": 7,
+            "weatherForecastDisplay": false,
+            "photo": "/images/modules/photo-lr-bst-compact-512x512.png",
+            "customPhoto": "/images/modules/photo-lr-bst-compact-512x512.png",
+            "isHttpV2": true,
+            "typeIsCellularRelay": false,
+            "isInternetAccessibleThroughLongPolling": false,
+            "platformEventOnSetData": false,
+            "isBluetoothOnly": false,
+            "typeIsLoraChild": false,
+            "typeIsLoraWan": false,
+            "typeIsLrms": false,
+            "typeIsLrag": false,
+            "typeIsLrbst": true,
+            "typeIsLrmv": false,
+            "typeIsRelay": true,
+            "typeIsSensor": false,
+            "typeIsPoolProduct": false,
+            "typeIsPoolProductOnly": false,
+            "typeIsPressureAnalyzer": false,
+            "typeIsLighting": false,
+            "typeIsWatering": false,
+            "typeIsTurfWatering": false,
+            "typeIsLinkable": false,
+            "typeIsAutomaticWaterBudgetCompatible": false,
+            "typeIsGeotracking": false,
+            "typeIsPoolAutomation": false,
+            "typeIsAgricultural": false,
+            "isBluetooth": false,
+            "isV6BluetoothDevice": false,
+            "isWifi": false,
+            "isBattery": false,
+            "isClusterCompatible": false,
+            "getPowerSourceTypeName": "AC 24V",
+            "getDisplayType": "lr-bst-compact",
+            "getBatteryLevel": 0,
+            "isProgrammationTypeConfigurable": false,
+            "isTransferable": false,
+            "isPowerSourceTypeRechargeable": false,
+            "getTimeBeforeDisconnected": 720,
+            "isInAgriculturalModuleGroup": false,
+            "isInWateringModuleGroup": false,
+            "usesBusConnectedSensors": false,
+            "battery": 0,
+            "stationsName": [],
+            "inputs": [],
+            "outputs": []
+        },
+        {
+            "name": "BPC-064E57",
+            "uuid": "150058B961064E570000000700064E57",
+            "softwareVersion": "6.2.29",
+            "isFrostFreeEnabled": false,
+            "batteryVoltage": 0,
+            "manufacturerType": "15",
+            "serialNumber": "150302064E570007",
+            "rssi": 1,
+            "owner": "5f154365a4a3a86708aadbf7",
+            "type": "lr-pc",
+            "numberOfInputs": 2,
+            "powerSourceType": 10,
+            "defaultName": "BPC3-064E57",
+            "macAddress": "C8:B9:61:06:4E:57",
+            "batteryLow": false,
+            "batteryAlarm": false,
+            "clockAlarm": false,
+            "sensorState": false,
+            "inputsUpdatedAt": "2020-11-07T09:44:20.118Z",
+            "programmationType": 0,
+            "SMSQuotaSendByDay": 4,
+            "SMSQuotaSendByMonth": 30,
+            "phoneNumberLock": 0,
+            "createdAt": "2020-11-07T09:44:19.064Z",
+            "updatedAt": "2023-03-28T00:39:04.485Z",
+            "programmingUpdatedAt": "2023-02-02T15:42:39.632Z",
+            "latitude": 48.82859393065251,
+            "longitude": 2.5393177587918516,
+            "locationKey": "133757",
+            "realyUpdatedAt": "2020-11-07T09:44:20.125Z",
+            "weatherForecast": {
+                "Headline": {
+                    "EffectiveDate": "2023-03-31T02:00:00+02:00",
+                    "EffectiveEpochDate": 1680220800,
+                    "Severity": 4,
+                    "Text": "Pluies intermittentes attendues de jeudi tard la nuit jusqu'à vendredi soir",
+                    "Category": "rain",
+                    "EndDate": "2023-04-01T02:00:00+02:00",
+                    "EndEpochDate": 1680307200,
+                    "MobileLink": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?unit=c",
+                    "Link": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?unit=c"
+                },
+                "DailyForecasts": [
+                    {
+                        "Date": "2023-03-27T07:00:00+02:00",
+                        "EpochDate": 1679893200,
+                        "Sun": {
+                            "Rise": "2023-03-27T07:39:00+02:00",
+                            "EpochRise": 1679895540,
+                            "Set": "2023-03-27T20:13:00+02:00",
+                            "EpochSet": 1679940780
+                        },
+                        "Moon": {
+                            "Rise": "2023-03-27T10:15:00+02:00",
+                            "EpochRise": 1679904900,
+                            "Set": "2023-03-28T03:33:00+02:00",
+                            "EpochSet": 1679967180,
+                            "Phase": "WaxingCrescent",
+                            "Age": 6
+                        },
+                        "Temperature": {
+                            "Minimum": {
+                                "Value": 1,
+                                "Unit": "C",
+                                "UnitType": 17
+                            },
+                            "Maximum": {
+                                "Value": 11,
+                                "Unit": "C",
+                                "UnitType": 17
+                            }
+                        },
+                        "RealFeelTemperature": {
+                            "Minimum": {
+                                "Value": -0.4,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Froid"
+                            },
+                            "Maximum": {
+                                "Value": 10.1,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Assez frais"
+                            }
+                        },
+                        "RealFeelTemperatureShade": {
+                            "Minimum": {
+                                "Value": -0.4,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Froid"
+                            },
+                            "Maximum": {
+                                "Value": 8,
+                                "Unit": "C",
+                                "UnitType": 17,
+                                "Phrase": "Assez frais"
+                            }
+                        },
+                        "HoursOfSun": 6.1,
+                        "DegreeDaySummary": {
+                            "Heating": {
+                                "Value": 12,
+                                "Unit": "C",
+                                "UnitType": 17
+                            },
+                            "Cooling": {
+                                "Value": 0,
+                                "Unit": "C",
+                                "UnitType": 17
+                            }
+                        },
+                        "AirAndPollen": [
+                            {
+                                "Name": "AirQuality",
+                                "Value": 0,
+                                "Category": "Bon",
+                                "CategoryValue": 1,
+                                "Type": "Ozone"
+                            },
+                            {
+                                "Name": "Grass",
+                                "Value": 0,
+                                "Category": "Bon",
+                                "CategoryValue": 1
+                            },
+                            {
+                                "Name": "Mold",
+                                "Value": 24072,
+                                "Category": "Malsain (p. sensibles)",
+                                "CategoryValue": 3
+                            },
+                            {
+                                "Name": "Ragweed",
+                                "Value": 0,
+                                "Category": "Bon",
+                                "CategoryValue": 1
+                            },
+                            {
+                                "Name": "Tree",
+                                "Value": 53,
+                                "Category": "Modéré",
+                                "CategoryValue": 2
+                            },
+                            {
+                                "Name": "UVIndex",
+                                "Value": 4,
+                                "Category": "Modéré",
+                                "CategoryValue": 2
+                            }
+                        ],
+                        "Day": {
+                            "Icon": 14,
+                            "IconPhrase": "Partiellement ensoleillé - averses",
+                            "HasPrecipitation": true,
+                            "PrecipitationType": "Rain",
+                            "PrecipitationIntensity": "Light",
+                            "ShortPhrase": "Nuages et soleil",
+                            "LongPhrase": "Nuages et soleil",
+                            "PrecipitationProbability": 55,
+                            "ThunderstormProbability": 11,
+                            "RainProbability": 55,
+                            "SnowProbability": 0,
+                            "IceProbability": 0,
+                            "Wind": {
+                                "Speed": {
+                                    "Value": 16.7,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 352,
+                                    "Localized": "N",
+                                    "English": "N"
+                                }
+                            },
+                            "WindGust": {
+                                "Speed": {
+                                    "Value": 37,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 360,
+                                    "Localized": "N",
+                                    "English": "N"
+                                }
+                            },
+                            "TotalLiquid": {
+                                "Value": 0.5,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Rain": {
+                                "Value": 0.5,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Snow": {
+                                "Value": 0,
+                                "Unit": "cm",
+                                "UnitType": 4
+                            },
+                            "Ice": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "HoursOfPrecipitation": 0.5,
+                            "HoursOfRain": 0.5,
+                            "HoursOfSnow": 0,
+                            "HoursOfIce": 0,
+                            "CloudCover": 54,
+                            "Evapotranspiration": {
+                                "Value": 2,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "SolarIrradiance": {
+                                "Value": 4389.9,
+                                "Unit": "W/m²",
+                                "UnitType": 33
+                            }
+                        },
+                        "Night": {
+                            "Icon": 36,
+                            "IconPhrase": "Passages nuageux",
+                            "HasPrecipitation": false,
+                            "ShortPhrase": "En partie couvert et frais",
+                            "LongPhrase": "En partie couvert et frais",
+                            "PrecipitationProbability": 3,
+                            "ThunderstormProbability": 0,
+                            "RainProbability": 2,
+                            "SnowProbability": 1,
+                            "IceProbability": 0,
+                            "Wind": {
+                                "Speed": {
+                                    "Value": 9.3,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 92,
+                                    "Localized": "E",
+                                    "English": "E"
+                                }
+                            },
+                            "WindGust": {
+                                "Speed": {
+                                    "Value": 18.5,
+                                    "Unit": "km/h",
+                                    "UnitType": 7
+                                },
+                                "Direction": {
+                                    "Degrees": 23,
+                                    "Localized": "NNE",
+                                    "English": "NNE"
+                                }
+                            },
+                            "TotalLiquid": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Rain": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "Snow": {
+                                "Value": 0,
+                                "Unit": "cm",
+                                "UnitType": 4
+                            },
+                            "Ice": {
+                                "Value": 0,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "HoursOfPrecipitation": 0,
+                            "HoursOfRain": 0,
+                            "HoursOfSnow": 0,
+                            "HoursOfIce": 0,
+                            "CloudCover": 48,
+                            "Evapotranspiration": {
+                                "Value": 0.3,
+                                "Unit": "mm",
+                                "UnitType": 3
+                            },
+                            "SolarIrradiance": {
+                                "Value": 28.5,
+                                "Unit": "W/m²",
+                                "UnitType": 33
+                            }
+                        },
+                        "Sources": [
+                            "AccuWeather "
+                        ],
+                        "MobileLink": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?day=1&unit=c",
+                        "Link": "http://www.accuweather.com/fr/fr/villiers-sur-marne/133757/daily-weather-forecast/133757?day=1&unit=c"
+                    }
+                ]
+            },
+            "sentAt": "2020-11-07T09:44:36.176Z",
+            "programmingSentAt": "2023-02-02T15:42:51.176Z",
+            "lastRadioCommunication": "2023-03-28T00:38:13.000Z",
+            "battery": 0,
+            "winteringState": false,
+            "relay": "5f9e901bc4efafea3a113129",
+            "firmwareUpdateFrequency": "always",
+            "address": "21 Rue Maurice Berteaux, Villiers-sur-Marne Île-de-France",
+            "status": {},
+            "waitingForStatusUpdate": false,
+            "id": "5fa66c735d8607b2057a8924",
+            "isOnline": false,
+            "hasPrograms": true,
+            "getClientCodeFromSerialNumber": 7,
+            "weatherForecastDisplay": false,
+            "photo": "/images/modules/photo-bpc-waterair-512x512.png",
+            "customPhoto": "/images/modules/photo-bpc-waterair-512x512.png",
+            "isHttpV2": true,
+            "typeIsCellularRelay": false,
+            "isInternetAccessibleThroughLongPolling": true,
+            "platformEventOnSetData": false,
+            "isBluetoothOnly": false,
+            "typeIsLoraChild": true,
+            "typeIsLoraWan": false,
+            "typeIsLrms": false,
+            "typeIsLrag": false,
+            "typeIsLrbst": false,
+            "typeIsLrmv": false,
+            "typeIsRelay": false,
+            "typeIsSensor": false,
+            "typeIsPoolProduct": true,
+            "typeIsPoolProductOnly": true,
+            "typeIsPressureAnalyzer": false,
+            "typeIsLighting": false,
+            "typeIsWatering": false,
+            "typeIsTurfWatering": false,
+            "typeIsLinkable": false,
+            "typeIsAutomaticWaterBudgetCompatible": false,
+            "typeIsGeotracking": false,
+            "typeIsPoolAutomation": true,
+            "typeIsAgricultural": false,
+            "isBluetooth": true,
+            "isV6BluetoothDevice": true,
+            "isWifi": false,
+            "isBattery": false,
+            "isClusterCompatible": false,
+            "getPowerSourceTypeName": "AC 220V",
+            "getDisplayType": "lr-pc",
+            "getBatteryLevel": 0,
+            "isProgrammationTypeConfigurable": false,
+            "isTransferable": false,
+            "isPowerSourceTypeRechargeable": false,
+            "getTimeBeforeDisconnected": 720,
+            "isInAgriculturalModuleGroup": false,
+            "isInWateringModuleGroup": false,
+            "usesBusConnectedSensors": false,
+            "stationsName": [
+                "Station 1",
+                "Station 2",
+                "Station 3"
+            ],
+            "inputs": [
+                {
+                    "interval": 15,
+                    "unit": 2,
+                    "lowThreshold": null,
+                    "index": 1,
+                    "name": "",
+                    "highThreshold": null,
+                    "expressionInverse": "x*100.0",
+                    "expression": "x/100.0",
+                    "type": 133,
+                    "module": "5fa66c735d8607b2057a8924",
+                    "pushAlert": true,
+                    "mailAlert": true,
+                    "isLastMeasureBeyondThresholds": false,
+                    "createdAt": "2020-11-07T09:44:19.130Z",
+                    "updatedAt": "2023-03-28T14:26:43.170Z",
+                    "lastHighThresholdAlertSent": null,
+                    "lastLowThresholdAlertSent": null,
+                    "realyUpdated": false,
+                    "realyUpdatedAt": "2020-11-07T09:44:20.118Z",
+                    "sentAt": "2020-11-07T09:44:36.205Z",
+                    "id": "5fa66c735d8607b2057a8926",
+                    "typeIsCumulativeData": false,
+                    "isBusConnectedSensor": false,
+                    "getPicto": "/images/pictos/drop_reverse.svg",
+                    "getName": ""
+                },
+                {
+                    "highThreshold": null,
+                    "type": 0,
+                    "expressionInverse": "x",
+                    "unit": 0,
+                    "interval": 0,
+                    "name": "",
+                    "lowThreshold": null,
+                    "index": 2,
+                    "expression": "x",
+                    "module": "5fa66c735d8607b2057a8924",
+                    "pushAlert": true,
+                    "mailAlert": true,
+                    "isLastMeasureBeyondThresholds": false,
+                    "createdAt": "2020-11-07T09:44:19.130Z",
+                    "updatedAt": "2023-03-28T14:26:43.170Z",
+                    "realyUpdated": false,
+                    "sentAt": "2020-11-07T09:44:36.210Z",
+                    "id": "5fa66c735d8607b2057a8927",
+                    "typeIsCumulativeData": false,
+                    "isBusConnectedSensor": false,
+                    "getPicto": "/images/pictos/drop_reverse.svg",
+                    "getName": ""
+                }
+            ],
+            "outputs": [
+                {
+                    "index": 1,
+                    "name": "Station 1",
+                    "module": "5fa66c735d8607b2057a8924",
+                    "createdAt": "2022-03-23T14:49:15.148Z",
+                    "updatedAt": "2022-03-23T14:49:15.148Z",
+                    "id": "623b336b02da26875fc99268"
+                },
+                {
+                    "index": 2,
+                    "name": "Station 2",
+                    "module": "5fa66c735d8607b2057a8924",
+                    "createdAt": "2022-03-23T14:49:15.150Z",
+                    "updatedAt": "2022-03-23T14:49:15.150Z",
+                    "id": "623b336b02da26875fc99269"
+                },
+                {
+                    "index": 3,
+                    "name": "Station 3",
+                    "module": "5fa66c735d8607b2057a8924",
+                    "createdAt": "2022-03-23T14:49:15.152Z",
+                    "updatedAt": "2022-03-23T14:49:15.152Z",
+                    "id": "623b336b02da26875fc9926a"
+                }
+            ]
+        }
+    ],
+    "agency": {
+        "name": "WATERAIR",
+        "enable": true,
+        "type": "Maison mère",
+        "useSSO": true,
+        "isPublic": true,
+        "country": "FR",
+        "email": "noreply@waterair.com",
+        "parent": "5f76f65bd03ace0e7c45c3e8",
+        "createdAt": "2021-03-18T15:36:01.134Z",
+        "updatedAt": "2023-03-28T16:25:10.339Z",
+        "products": [
+            {
+                "name": "Easy Clear C",
+                "code": "easy_clear_c",
+                "sold": true
+            },
+            {
+                "name": "Easy Minus",
+                "code": "easy_minus",
+                "sold": true
+            },
+            {
+                "name": "Easy Plus",
+                "code": "easy_plus",
+                "sold": true
+            },
+            {
+                "name": "Easy Quattro",
+                "code": "easy_quattro",
+                "sold": true
+            },
+            {
+                "name": "Easy Pool 2",
+                "code": "easy_pool_2",
+                "sold": true
+            }
+        ],
+        "id": "5f76f65bd03ace0e7c45c3e9"
+    },
+    "email": "dmassou@hotmail.com",
+    "waterair": {
+        "id": "159010",
+        "customerId": "159010",
+        "token": "3fbbc61d88474b7c24c210461946398d4160c6863368b1b9b3e2392b19ee6da3",
+        "pool": {
+            "model": "SARA03",
+            "volume": 10.81
+        }
+    },
+    "firstName": "DAVID",
+    "lastName": "MASSOU",
+    "addressLine1": "21 RUE MAURICE BERTEAUX",
+    "postalCode": "94350",
+    "city": "VILLIERS SUR MARNE",
+    "lowBatteryEmail": true,
+    "lowBatteryPush": true,
+    "customersAlertsEmail": true,
+    "customersAlertsPush": true,
+    "createdAt": "2020-07-20T07:10:29.801Z",
+    "updatedAt": "2023-03-28T16:57:04.649Z",
+    "language": "en",
+    "apnsTokens": [
+        {
+            "topic": "com.waterair.easycare",
+            "token": "64454f70b9317b52dc314b59f08f5532671dfa941c2ae150e98fc65a81b32ad7",
+            "appVersion": "2.3.2",
+            "apiVersion": "2.5"
+        },
+        {
+            "topic": "com.waterair.easycare",
+            "token": "9ff744f98196c47145a4166c9dabd87536f015e293e482a5bb6316b695f21fc4",
+            "appVersion": "2.3.2",
+            "apiVersion": "2.5"
+        },
+        {
+            "topic": "com.waterair.easycare",
+            "token": "51fd6eb93636f25357c3ab7367872176e6a60197e3659f3e43b9ddd15acfc393",
+            "appVersion": "2.3.2",
+            "apiVersion": "2.5"
+        },
+        {
+            "topic": "com.waterair.easycare",
+            "token": "e3f286c8a3fef64875a99ca52fc229c60e702ff9ba0e851771eccf5422bcca6d",
+            "appVersion": "2.4.4",
+            "apiVersion": "2.5"
+        },
+        {
+            "topic": "com.waterair.easycare",
+            "token": "bbbc5a5272f6d2f70fadac0dc0ecb3a96a4a3bcac36e9c92dfc87efef212c613",
+            "appVersion": "2.4.6",
+            "apiVersion": "2.5"
+        },
+        {
+            "topic": "com.waterair.easycare",
+            "token": "e75c7b996bbf93405980a171a7c6d7f22546a3590faeebf5f25a3e4750a15d5e",
+            "appVersion": "2.4.6",
+            "apiVersion": "2.5"
+        }
+    ],
+    "personalDataUsage": {
+        "consentDate": "2021-05-08T06:07:47.562Z",
+        "userAgent": "com.waterair.easycare/2.3 (iPhone; iOS 14.5.1; Scale/2.00)",
+        "conditionVersion": "1.0"
+    },
+    "gcmTokens": [
+        {
+            "topic": "com.waterair.easycare",
+            "token": "dSrFooB0RoWV03rUnWeTlD:APA91bGYWIXzZawxqUZjcXKJOMBoKr7ZysKfb1uhv4XODg2rEHGVtp7Q3D27M9PJZJ4-ZjqhnBhlnLoQqySBBJ24rpC1n456jp2n_FYmiskc76cLGBLsu4wwj8PIAnG8pRfTrw_pSazj",
+            "appVersion": "2.4.7",
+            "apiVersion": "2.6"
+        }
+    ],
+    "id": "5f154365a4a3a86708aadbf7",
+    "mainRole": "Client",
+    "getUserNameWithEmail": "DAVID MASSOU"
+}
