@@ -51,7 +51,7 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
             if easycare.get_connection_status()
             else "mdi:network-off-outline"
         )
-        self._attr_unique_id = "EasyCare_Connection_Sensor"
+        self._attr_unique_id = "easycare_connection_sensor"
         self._easycare = easycare
         _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
 

@@ -26,7 +26,7 @@ class EasyCareCoordinator(DataUpdateCoordinator):
             # Name of the data. For logging purposes.
             name="EasyCare_Cooridnator",
             # Polling interval. Will only be polled if there are subscribers.
-            update_interval=timedelta(seconds=10),
+            update_interval=timedelta(seconds=60),
         )
         self._cfg = config
         self._connect = connect
@@ -38,3 +38,6 @@ class EasyCareCoordinator(DataUpdateCoordinator):
         so entities can quickly look up their data.
         """
         _LOGGER.debug("Calling DataCoordinator to update data API")
+        # self._connect._is_connected = (
+        #    False if self._connect._is_connected is True else True
+        # )
