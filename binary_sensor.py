@@ -66,4 +66,4 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
         )
         self._attr_is_on = self._easycare.get_connection_status()
         self.async_write_ha_state()
-        _LOGGER.debug("EasyCare update sensor calling")
+        _LOGGER.debug("EasyCare update sensor %s", self.name)

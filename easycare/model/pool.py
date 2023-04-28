@@ -4,7 +4,7 @@ import json
 
 class Pool:
     """
-    Class representing a client object
+    Class representing a pool object
     """
 
     def __init__(self, pool: json) -> None:
@@ -14,25 +14,6 @@ class Pool:
         else:
             self._is_filled = True
         self._pool = pool
-
-        """
-        if "status" in pool:
-            if "lastPhMeasure" in pool["status"]:
-                self._last_ph_measure = {
-                    "value": pool["status"]["lastPhMeasure"]["value"],
-                    "date": pool["status"]["lastPhMeasure"]["date"],
-                }
-            if "lastRedoxMeasure" in pool["status"]:
-                self._last_chlorine_measure = {
-                    "value": pool["status"]["lastRedoxMeasure"]["value"],
-                    "date": pool["status"]["lastRedoxMeasure"]["date"],
-                }
-            if "lastTemperatureMeasure" in pool["status"]:
-                self._last_temperature_measure = {
-                    "value": pool["status"]["lastTemperatureMeasure"]["value"],
-                    "date": pool["status"]["lastTemperatureMeasure"]["date"],
-                }
-        """
 
     @property
     def is_filled(self) -> bool:

@@ -22,15 +22,16 @@ class Connect:
 
         """
         self._config = config
-        self._bearer = TEMP_BEARER  # None
+        # self._bearer = TEMP_BEARER  # None
         self._bearer_timeout = 0  # time.time()
-        # self._bearer = None
+        self._bearer = None
         # self._bearer_timeout = time.time()
         self._is_connected = False
+        self._user_json = None
 
     def login(self) -> bool:
         """Login to Easy-Care and Store the Bearer"""
-        if self.check_bearer() is True:
+        if self._check_bearer() is True:
             _LOGGER.debug("Bearer is defined, no need to login !")
             self._is_connected = True
             return True
@@ -46,7 +47,7 @@ class Connect:
         self._is_connected = True
         return True
 
-    def check_bearer(self) -> bool:
+    def _check_bearer(self) -> bool:
         """Check if Bearer is always valid"""
         if time.time() > self._bearer_timeout and self._bearer_timeout != 0:
             self._bearer = None
@@ -106,10 +107,14 @@ class Connect:
         """Return the connextion status for Easy-Care"""
         return self._is_connected
 
-    def easycare_get_user(self) -> json:
+    def get_user_json(self) -> json:
+        """Return the user jsonfor Easy-Care"""
+        return self._user_json
+
+    def easycare_update_user(self) -> None:
         """Get User detail by calling getUser"""
         if self._is_connected is False:
-            self._easycare_login()
+            self.login()
 
         if self._is_connected is False:
             return None
@@ -149,4 +154,4 @@ class Connect:
             return None
 
         _LOGGER.debug("GetUser done !")
-        return json.loads(user.content)
+        self._user_json = json.loads(user.content)

@@ -45,9 +45,6 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     if connected is False:
         return False
 
-    # Initialize the component with static datas
-    await hass.async_add_executor_job(initialize_easycare, hass, conf)
-
     # First call to API for initial datas
     easycare: EasyCare = hass.data.get(COMPONENT_DATA)
     coordinator: EasyCareCoordinator = easycare.get_coordinator()
@@ -80,10 +77,3 @@ def connect_easycare(hass: HomeAssistant, config) -> json:
 
     _LOGGER.debug("Calling EasyCare login")
     return easycare.connect()
-
-
-def initialize_easycare(hass: HomeAssistant, config) -> None:
-    """Call initialization"""
-    easycare: EasyCare = hass.data.get(COMPONENT_DATA)
-    _LOGGER.debug("Calling EasyCare initialization")
-    easycare.get_client()
