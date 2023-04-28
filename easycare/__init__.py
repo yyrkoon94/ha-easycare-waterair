@@ -6,6 +6,7 @@ from .coordinator import EasyCareCoordinator
 from .model.client import Client
 from .model.pool import Pool
 from .model.metrics import Metrics
+from .model.alerts import Alerts
 from datetime import timedelta
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
@@ -26,6 +27,7 @@ class EasyCare:
         self._client = None
         self._pool = None
         self._metrics = None
+        self._alerts = None
         self._coordinator = EasyCareCoordinator(hass, self._cfg, self._connect)
 
     def initialize(self) -> None:
@@ -83,3 +85,17 @@ class EasyCare:
             else:
                 self._metrics = Metrics(user_json["pools"][self._cfg.pool_id - 1])
         return self._metrics
+
+    def get_alerts(self) -> Alerts:
+        """Return alerts Detail"""
+        user_json = self._connect.get_user_json()
+        if user_json is None:
+            if self._alerts is None:
+                self._alerts = Alerts(None)
+        else:
+            if len(user_json["pools"]) < self._cfg.pool_id:
+                if self._alerts is None:
+                    self._alerts = Alerts(None)
+            else:
+                self._alerts = Alerts(user_json["pools"][self._cfg.pool_id - 1])
+        return self._alerts

@@ -5,7 +5,7 @@ from datetime import datetime
 
 class Metrics:
     """
-    Class representing a client object
+    Class representing the pool metrics
     """
 
     def __init__(self, pool: json) -> None:

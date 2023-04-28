@@ -3,7 +3,12 @@ from __future__ import annotations
 
 import logging
 
-from homeassistant.components.sensor import SensorEntity, SensorDeviceClass
+from homeassistant.components.sensor import (
+    SensorEntity,
+    SensorDeviceClass,
+    SensorStateClass,
+    UnitOfTemperature,
+)
 
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
@@ -40,6 +45,8 @@ def setup_platform(
     sensors.append(PoolLastUpdatePHWithCoordinator(easycare))
     sensors.append(PoolChlorineWithCoordinator(easycare))
     sensors.append(PoolLastUpdateChlorineWithCoordinator(easycare))
+    sensors.append(PoolNotificationWithCoordinator(easycare))
+    sensors.append(PoolNotificationDateWithCoordinator(easycare))
 
     add_entities(sensors)
 
@@ -105,6 +112,8 @@ class PoolTemperatureWithCoordinator(CoordinatorEntity, SensorEntity):
         self._attr_icon = "mdi:pool-thermometer"
         self._attr_unique_id = "easycare_pool_temperature_sensor"
         self._attr_device_class = SensorDeviceClass.TEMPERATURE
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_unit_of_measurement = UnitOfTemperature.CELSIUS
         self._easycare = easycare
         metrics = easycare.get_pool_metrics()
         if metrics.is_filled:
@@ -157,6 +166,7 @@ class PoolPHWithCoordinator(CoordinatorEntity, SensorEntity):
         self._attr_name = "Easy-Care Pool PH"
         self._attr_icon = "mdi:ph"
         self._attr_unique_id = "easycare_pool_ph_sensor"
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         self._easycare = easycare
         metrics = easycare.get_pool_metrics()
         if metrics.is_filled:
@@ -209,6 +219,7 @@ class PoolChlorineWithCoordinator(CoordinatorEntity, SensorEntity):
         self._attr_name = "Easy-Care Pool Chlorine"
         self._attr_icon = "mdi:water"
         self._attr_unique_id = "easycare_pool_chlore_sensor"
+        self._attr_state_class = SensorStateClass.MEASUREMENT
         self._easycare = easycare
         metrics = easycare.get_pool_metrics()
         if metrics.is_filled:
@@ -248,5 +259,56 @@ class PoolLastUpdateChlorineWithCoordinator(CoordinatorEntity, SensorEntity):
         metrics = self._easycare.get_pool_metrics()
         if metrics.is_filled:
             self._attr_native_value = metrics.last_chlorine_measure_date
+        self.async_write_ha_state()
+        _LOGGER.debug("EasyCare update sensor %s", self.name)
+
+
+class PoolNotificationWithCoordinator(CoordinatorEntity, SensorEntity):
+    """Representation of a Sensor."""
+
+    def __init__(self, easycare: EasyCare) -> None:
+        """Initialize pool temperature sensor."""
+        super().__init__(easycare.get_coordinator())
+        self._attr_name = "Easy-Care Pool Notification"
+        self._attr_unique_id = "easycare_pool_notification_sensor"
+        self._easycare = easycare
+        alerts = easycare.get_alerts()
+        if alerts.is_filled:
+            self._attr_native_value = alerts.notification_value
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
+    def _handle_coordinator_update(self) -> None:
+        """Fetch new state data for the sensor.
+        This is the only method that should fetch new data for Home Assistant.
+        """
+        alerts = self._easycare.get_alerts()
+        if alerts.is_filled:
+            self._attr_native_value = alerts.notification_value
+        self.async_write_ha_state()
+        _LOGGER.debug("EasyCare update sensor %s", self.name)
+
+
+class PoolNotificationDateWithCoordinator(CoordinatorEntity, SensorEntity):
+    """Representation of a Sensor."""
+
+    def __init__(self, easycare: EasyCare) -> None:
+        """Initialize pool ph sensor."""
+        super().__init__(easycare.get_coordinator())
+        self._attr_name = "Easy-Care Pool Notification Date"
+        self._attr_unique_id = "easycare_pool_notification_date_sensor"
+        self._attr_device_class = SensorDeviceClass.DATE
+        self._easycare = easycare
+        alerts = easycare.get_alerts()
+        if alerts.is_filled:
+            self._attr_native_value = alerts.notification_date
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
+    def _handle_coordinator_update(self) -> None:
+        """Fetch new state data for the sensor.
+        This is the only method that should fetch new data for Home Assistant.
+        """
+        alerts = easycare.get_alerts()
+        if alerts.is_filled:
+            self._attr_native_value = alerts.notification_date
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)

@@ -19,9 +19,9 @@
             "adminUsers": [
                 "5f154365a4a3a86708aadbf7"
             ],
-            "preventWaterChemistryCorrectionProtocolTriggering": "2023-03-22T21:15:08.312Z",
+            "preventWaterChemistryCorrectionProtocolTriggering": "2023-04-04T13:10:32.558Z",
             "createdAt": "2020-11-01T10:38:20.404Z",
-            "updatedAt": "2023-03-27T12:27:35.373Z",
+            "updatedAt": "2023-04-28T13:32:27.851Z",
             "addressWeather": {
                 "cityName": "Villiers-sur-Marne",
                 "departementName": "Val-de-Marne",
@@ -36,26 +36,26 @@
             "status": {
                 "state": false,
                 "lastPhMeasure": {
-                    "value": 7.52,
-                    "date": 1679739840
+                    "value": 7.49,
+                    "date": 1682290740
                 },
                 "lastRedoxMeasure": {
-                    "value": 590,
-                    "date": 1679901840
+                    "value": 618,
+                    "date": 1681939740
                 },
                 "lastTemperatureMeasure": {
-                    "value": 12.31,
-                    "date": 1679919840
+                    "value": 15.18,
+                    "date": 1682688540
                 },
-                "averageTemperatureOverTheLastHour": 11.62,
+                "averageTemperatureOverTheLastHour": 13.27,
                 "winteringState": false,
                 "poolWithoutModules": false,
                 "hasFaultyProbe": false,
                 "agency": "5f76f65bd03ace0e7c45c3e9",
-                "overtakingThreshold": "1"
+                "overtakingThreshold": "0"
             },
             "waterChemistryCorrectionProtocol": {
-                "uuid": "5b6c955a-02bd-4239-9197-e32bf0883548",
+                "uuid": "eb130041-0323-4449-8d82-f12d43333c3b",
                 "poolWaterTreatmenType": "chlorineEasyPool2",
                 "expectedChlorineLow": 0.05,
                 "expectedChlorineHigh": 1.8,
@@ -63,14 +63,14 @@
                 "expectedPhLow": 7,
                 "expectedPhHigh": 7.4,
                 "lastPhMeasure": 7.5,
-                "maxChlorineRateOverTheLastTwelveHours": 0.35,
-                "maxChlorineRateOverTheLastTwentyFourHours": 0.35,
-                "minChlorineRateOverTheLastTwelveHours": 0.35,
-                "averagePhOverTheLastTwentyFourHours": 7.47,
+                "maxChlorineRateOverTheLastTwelveHours": 0.39,
+                "maxChlorineRateOverTheLastTwentyFourHours": 0.39,
+                "minChlorineRateOverTheLastTwelveHours": 0.39,
+                "averagePhOverTheLastTwentyFourHours": 7.54,
                 "productQuantityInACompleteDoseDependingOnVolume": 110,
                 "correctionProtocolType": "phCorrectionProtocol",
                 "userAgency": "WATERAIR",
-                "date": "2023-03-23T07:03:48.212Z",
+                "date": "2023-04-04T13:28:33.692Z",
                 "stepIndex": "#send_message_ph_is_unstable",
                 "stepDelay": 0,
                 "nextStepIndex": "#save_ph_correction_protocol_triggered_event",
@@ -99,7 +99,7 @@
                         }
                     ]
                 },
-                "lastPHOutOfControlAlertSentDate": "2023-03-24T13:55:41.333Z"
+                "lastPHOutOfControlAlertSentDate": "2023-04-23T23:00:10.172Z"
             },
             "delayNextWaterChemistryCorrectionProtocol": {
                 "phCorrectionProtocol": null,
@@ -115,7 +115,7 @@
                     "value": "unstable_pH_sweet_water"
                 },
                 {
-                    "date": "2023-03-20T11:08:46.726Z",
+                    "date": "2023-04-01T22:14:01.543Z",
                     "value": "ph_correction_protocol_triggered"
                 }
             ],
@@ -124,7 +124,7 @@
                     "action": "shouldDoChlorineTreatment",
                     "poolIdentifier": "5f9e901cc4efafea3a11312c",
                     "moduleIdentifier": "5f9e901b19b88cb10766c724",
-                    "date": "2023-03-21T00:00:00+01:00"
+                    "date": "2023-04-13T00:00:00+02:00"
                 }
             },
             "tacExtrapolation": {
@@ -136,7 +136,7 @@
             },
             "chlorineRegularTreatmentAssistant": {
                 "isActive": true,
-                "lastTreatmentDate": "2023-03-10T16:31:19.822Z"
+                "lastTreatmentDate": "2023-04-02T13:10:20.561Z"
             },
             "moduleTypesLinked": [
                 "lr-mas",
@@ -168,7 +168,7 @@
     "customersAlertsEmail": true,
     "customersAlertsPush": true,
     "createdAt": "2020-07-20T07:10:29.801Z",
-    "updatedAt": "2023-03-27T13:15:29.224Z",
+    "updatedAt": "2023-04-28T13:59:19.669Z",
     "language": "en",
     "apnsTokens": [
         {
@@ -197,14 +197,14 @@
         },
         {
             "topic": "com.waterair.easycare",
-            "token": "bbbc5a5272f6d2f70fadac0dc0ecb3a96a4a3bcac36e9c92dfc87efef212c613",
-            "appVersion": "2.4.6",
+            "token": "e75c7b996bbf93405980a171a7c6d7f22546a3590faeebf5f25a3e4750a15d5e",
+            "appVersion": "2.5",
             "apiVersion": "2.5"
         },
         {
             "topic": "com.waterair.easycare",
-            "token": "e75c7b996bbf93405980a171a7c6d7f22546a3590faeebf5f25a3e4750a15d5e",
-            "appVersion": "2.4.6",
+            "token": "bbbc5a5272f6d2f70fadac0dc0ecb3a96a4a3bcac36e9c92dfc87efef212c613",
+            "appVersion": "2.5",
             "apiVersion": "2.5"
         }
     ],
