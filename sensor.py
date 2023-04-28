@@ -113,7 +113,7 @@ class PoolTemperatureWithCoordinator(CoordinatorEntity, SensorEntity):
         self._attr_unique_id = "easycare_pool_temperature_sensor"
         self._attr_device_class = SensorDeviceClass.TEMPERATURE
         self._attr_state_class = SensorStateClass.MEASUREMENT
-        self._attr_unit_of_measurement = UnitOfTemperature.CELSIUS
+        self._attr_native_unit_of_measurement = UnitOfTemperature.CELSIUS
         self._easycare = easycare
         metrics = easycare.get_pool_metrics()
         if metrics.is_filled:
@@ -307,7 +307,7 @@ class PoolNotificationDateWithCoordinator(CoordinatorEntity, SensorEntity):
         """Fetch new state data for the sensor.
         This is the only method that should fetch new data for Home Assistant.
         """
-        alerts = easycare.get_alerts()
+        alerts = self._easycare.get_alerts()
         if alerts.is_filled:
             self._attr_native_value = alerts.notification_date
         self.async_write_ha_state()

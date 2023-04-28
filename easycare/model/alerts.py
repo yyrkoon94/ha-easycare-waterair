@@ -17,15 +17,20 @@ class Alerts:
         self._pool = pool
 
         if "notifications" in pool:
-            for notification in pool["notifications"]:
-                date_notification = datetime.fromisoformat(
-                    pool["notifications"][notification]["date"]
-                )
-                self._notification = {
-                    "value": pool["notifications"][notification]["action"],
-                    "date": date_notification,
-                }
-                break
+            if pool["notifications"] != {}:
+                for notification in pool["notifications"]:
+                    date_notification = datetime.fromisoformat(
+                        pool["notifications"][notification]["date"]
+                    )
+                    self._notification = {
+                        "value": pool["notifications"][notification]["action"],
+                        "date": date_notification,
+                    }
+                    break
+            else:
+                self._notification = {}
+        else:
+            self._notification = {}
 
     @property
     def is_filled(self) -> bool:
@@ -35,11 +40,9 @@ class Alerts:
     @property
     def notification_value(self) -> str:
         """The notification value"""
-        return (
-            self._notification["value"] if "value" in self._notification else "Unknown"
-        )
+        return self._notification["value"] if "value" in self._notification else "None"
 
     @property
     def notification_date(self) -> str:
         """The notification date"""
-        return self._notification["date"] if "date" in self._notification else "Unknown"
+        return self._notification["date"] if "date" in self._notification else None
