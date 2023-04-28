@@ -1,0 +1,5 @@
+{
+  "name": "EasyCare for Waterair",
+  "homeassistant": "2023.1.0",
+  "domains": ["binary_sensor", "sensor"]
+}
