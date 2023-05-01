@@ -1,6 +1,6 @@
 """Class reprsenting pool data"""
 import json
-from datetime import datetime
+from dateutil import parser
 
 
 class Alerts:
@@ -19,7 +19,7 @@ class Alerts:
         if "notifications" in pool:
             if pool["notifications"] != {}:
                 for notification in pool["notifications"]:
-                    date_notification = datetime.fromisoformat(
+                    date_notification = parser.parse(
                         pool["notifications"][notification]["date"]
                     )
                     self._notification = {

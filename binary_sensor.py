@@ -53,7 +53,7 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
         )
         self._attr_unique_id = "easycare_connection_sensor"
         self._easycare = easycare
-        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+        _LOGGER.debug("EasyCare-Binary-Sensor: %s created", self.name)
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.

@@ -1,6 +1,7 @@
 """Class reprsenting pool data"""
 import json
 from datetime import datetime
+from dateutil import parser
 
 
 class Metrics:
@@ -18,24 +19,34 @@ class Metrics:
 
         if "status" in pool:
             if "lastPhMeasure" in pool["status"]:
-                date_ph = datetime.fromtimestamp(
-                    pool["status"]["lastPhMeasure"]["date"]
+                date_ph = (
+                    datetime.fromtimestamp(pool["status"]["lastPhMeasure"]["date"])
+                    if "date" in pool["status"]["lastPhMeasure"]
+                    else parser.parse(pool["status"]["lastPhMeasure"]["timestamp"])
                 )
                 self._last_ph_measure = {
                     "value": pool["status"]["lastPhMeasure"]["value"],
                     "date": date_ph,
                 }
             if "lastRedoxMeasure" in pool["status"]:
-                date_chlorine = datetime.fromtimestamp(
-                    pool["status"]["lastRedoxMeasure"]["date"]
+                date_chlorine = (
+                    datetime.fromtimestamp(pool["status"]["lastRedoxMeasure"]["date"])
+                    if "date" in pool["status"]["lastRedoxMeasure"]
+                    else parser.parse(pool["status"]["lastRedoxMeasure"]["timestamp"])
                 )
                 self._last_chlorine_measure = {
                     "value": pool["status"]["lastRedoxMeasure"]["value"],
                     "date": date_chlorine,
                 }
             if "lastTemperatureMeasure" in pool["status"]:
-                date_temperature = datetime.fromtimestamp(
-                    pool["status"]["lastTemperatureMeasure"]["date"]
+                date_temperature = (
+                    datetime.fromtimestamp(
+                        pool["status"]["lastTemperatureMeasure"]["date"]
+                    )
+                    if "date" in pool["status"]["lastTemperatureMeasure"]
+                    else parser.parse(
+                        pool["status"]["lastTemperatureMeasure"]["timestamp"]
+                    )
                 )
                 self._last_temperature_measure = {
                     "value": pool["status"]["lastTemperatureMeasure"]["value"],

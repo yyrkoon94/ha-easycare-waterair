@@ -8,7 +8,6 @@ import time
 from .config import EasyCareConfig
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
-TEMP_BEARER = "QESosTRAltaiHhBFfIMi35flqeiH1O32ZFWqnj6FTVGEUeRzhlckS5dg3STITccefk9uEy7e9YWVKwJ2dgq7W4XLmuwVbMAOi61U2OYlYvakOdo1EJ1RCJriAad7hIQID2mUgqfF75TUmktAg2FpfYcTFOnTLSfTuAxtCvFPnYiaGzmO7eJsFTtU0YltUlWBNns8RBOizQEMOAUdRSCCWHI0z4qpvvouR97nAt0x7c1GaVqhhWB1TeAi1JUwkcLB"
 
 
 class Connect:
@@ -22,10 +21,8 @@ class Connect:
 
         """
         self._config = config
-        # self._bearer = TEMP_BEARER  # None
-        self._bearer_timeout = 0  # time.time()
+        self._bearer_timeout = 0
         self._bearer = None
-        # self._bearer_timeout = time.time()
         self._is_connected = False
         self._user_json = None
 

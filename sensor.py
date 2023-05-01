@@ -75,7 +75,7 @@ class StaticPoolOwner(SensorEntity):
         else:
             self._attr_available = False
         self._easycare = easycare
-        _LOGGER.debug("Sensor %s created", self.name)
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
 
 
 class StaticPoolDetail(SensorEntity):
@@ -99,7 +99,7 @@ class StaticPoolDetail(SensorEntity):
         else:
             self._attr_available = False
         self._easycare = easycare
-        _LOGGER.debug("Sensor %s created", self.name)
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
 
 
 class PoolTemperatureWithCoordinator(CoordinatorEntity, SensorEntity):
