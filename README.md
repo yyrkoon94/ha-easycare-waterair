@@ -15,8 +15,21 @@ The simplest way to install this card is to add this repository to HACS. If you 
 ### Upload to HA
 
 Download source code zip file file from the [latest-release][release-url].
-Put the contains of the zip file into your `config/custom_components` directory in a folder named `ha-easycare-waterair`.
+Put the contains of the zip file into your `config/custom_components` directory and renamed the folder `ha-easycare-waterair-xxx` to `ha-easycare-waterair`.
 
+### Restart HA
+After installing the components using HACS or manually, you have to restart Home Assistant.
+At this time, the component is ready to be used.
+
+## Configuration
+To use the component, just edit your configuration.yaml and add the following lines :
+```
+easycare_waterair:
+  username: your_user_name
+  password: your_password
+```
+And now restart HA again. 
+You will now seeing 10 new sensors :
 
 
 <!-- Badges -->
