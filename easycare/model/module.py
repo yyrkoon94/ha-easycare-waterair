@@ -19,6 +19,7 @@ class Module:
         self._id = module["id"]
         self._serial_number = module["serialNumber"]
         self._image = module["customPhoto"]
+        self._number_of_inputs = module["numberOfInputs"]
 
     @property
     def is_filled(self) -> bool:
@@ -49,3 +50,8 @@ class Module:
     def image(self) -> str:
         """The module name"""
         return self._image
+
+    @property
+    def number_of_inputs(self) -> str:
+        """The module name"""
+        return self._number_of_inputs

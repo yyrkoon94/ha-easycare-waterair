@@ -122,6 +122,7 @@ class PoolModuleWithCoordinator(CoordinatorEntity, SensorEntity):
             "module_id": module.id,
             "module_name": module.name,
             "module_serial_number": module.serial_number,
+            "module_number_of_inputs": module.number_of_inputs,
             "module_image": module.image,
             "module_idx": idx,
         }

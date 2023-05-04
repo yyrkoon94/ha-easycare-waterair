@@ -30,7 +30,7 @@ def setup_platform(
 ) -> None:
     """Set up the sensor platform."""
     # We only want this platform to be set up via discovery.
-    easycare = hass.data.get(COMPONENT_DATA)
+    easycare: EasyCare = hass.data.get(COMPONENT_DATA)
     sensors = []
     # MyEntity(coordinator, idx) for idx, ent in enumerate(easycare.get_coordinator().data)
     sensors.append(EasyCareConnectedSensorWithCoordinator(easycare))

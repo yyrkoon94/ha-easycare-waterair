@@ -27,7 +27,7 @@ _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 DOMAIN = "easycare_waterair"
 COMPONENT_DATA = "easycare_waterair-data"
 
-PLATFORMS = [Platform.BINARY_SENSOR, Platform.SENSOR]
+PLATFORMS = [Platform.BINARY_SENSOR, Platform.SENSOR, Platform.LIGHT]
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:

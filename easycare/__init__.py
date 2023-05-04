@@ -54,6 +54,7 @@ class EasyCare:
     def get_modules(self):
         """Return modules array"""
         modules = self._connect.get_modules()
+        self._modules = []
         for module in modules:
             self._modules.append(Module(module))
         return self._modules
