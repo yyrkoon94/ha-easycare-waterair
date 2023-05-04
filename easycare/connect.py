@@ -25,6 +25,7 @@ class Connect:
         self._bearer = None
         self._is_connected = False
         self._user_json = None
+        self._modules = None
 
     def login(self) -> bool:
         """Login to Easy-Care and Store the Bearer"""
@@ -105,8 +106,55 @@ class Connect:
         return self._is_connected
 
     def get_user_json(self) -> json:
-        """Return the user jsonfor Easy-Care"""
+        """Return the user json for Easy-Care"""
         return self._user_json
+
+    def get_modules(self) -> json:
+        """Return the modules for Easy-Care"""
+        return self._modules
+
+    def easycare_update_modules(self) -> None:
+        """Get modules detail by calling getUserWithHisModules"""
+        if self._is_connected is False:
+            self.login()
+
+        if self._is_connected is False:
+            return None
+
+        headers = {
+            "Content-Type": "application/json",
+            "User-Agent": "connected-pool-waterair/2.4.6 (iPad; iOS 16.3; Scale/2.00)",
+            "authorization": "Bearer " + self._bearer,
+            "accept": "version=2.5",
+        }
+
+        attempt = 0
+        modules = None
+        while attempt < 1:
+            attempt += 1
+            _LOGGER.debug("getUserWithHisModules attempt #%s", attempt)
+            modules = requests.post(
+                self._config.host + "/api/getUserWithHisModules",
+                headers=headers,
+                timeout=3,
+                verify=False,
+            )
+            if modules is not None:
+                break
+            time.sleep(1)
+        if modules is None:
+            _LOGGER.error("Error calling getUserWithHisModules")
+            return None
+        if modules.status_code != 200:
+            _LOGGER.error(
+                "Request failed, status_code is %s and message %s",
+                modules.status_code,
+                modules.content,
+            )
+            return None
+        json_modules = json.loads(modules.content)
+        self._modules = json_modules["modules"]
+        _LOGGER.debug("getUserWithHisModules done !")
 
     def easycare_update_user(self) -> None:
         """Get User detail by calling getUser"""
@@ -150,5 +198,5 @@ class Connect:
             self._is_connected = False
             return None
 
-        _LOGGER.debug("GetUser done !")
         self._user_json = json.loads(user.content)
+        _LOGGER.debug("GetUser done !")

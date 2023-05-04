@@ -2,11 +2,12 @@ import logging
 from homeassistant.core import HomeAssistant
 from .config import EasyCareConfig
 from .connect import Connect
-from .coordinator import EasyCareCoordinator
+from .coordinator import EasyCareCoordinator, EasyCareModuleCoordinator
 from .model.client import Client
 from .model.pool import Pool
 from .model.metrics import Metrics
 from .model.alerts import Alerts
+from .model.module import Module
 from datetime import timedelta
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
@@ -28,22 +29,37 @@ class EasyCare:
         self._pool = None
         self._metrics = None
         self._alerts = None
+        self._modules = []
         self._coordinator = EasyCareCoordinator(hass, self._cfg, self._connect)
+        self._module_coordinator = EasyCareModuleCoordinator(
+            hass, self._cfg, self._connect
+        )
 
     def initialize(self) -> None:
         """Initialization with firsts values"""
         self._connect.easycare_update_user()
 
     def get_coordinator(self) -> bool:
-        """Return the connextion status for Easy-Care"""
+        """Return the coordianteur for live datas"""
         return self._coordinator
+
+    def get_module_coordinator(self) -> bool:
+        """Return the coordinator for module datas"""
+        return self._module_coordinator
 
     def connect(self) -> bool:
         """Call the connect api for the first login"""
         return self._connect.login()
 
+    def get_modules(self):
+        """Return modules array"""
+        modules = self._connect.get_modules()
+        for module in modules:
+            self._modules.append(Module(module))
+        return self._modules
+
     def get_connection_status(self) -> bool:
-        """Return the connextion status for Easy-Care"""
+        """Return the connection status for Easy-Care"""
         return self._connect.get_connection_status()
 
     def get_client(self) -> Client:

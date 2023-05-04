@@ -19,7 +19,7 @@ from homeassistant.const import (
 from homeassistant.const import Platform
 
 from .easycare import EasyCare
-from .easycare import EasyCareCoordinator
+from .easycare import EasyCareCoordinator, EasyCareModuleCoordinator
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
@@ -37,11 +37,9 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     # Read config
     conf = config[DOMAIN]
 
-    # Connect to Waterair
+    # Connect to Waterair, Return boolean to indicate that initialization was successfully
     connected = await hass.async_add_executor_job(connect_easycare, hass, conf)
 
-    # Return boolean to indicate that initialization was successfully.
-    # user = connect_easycare(hass, config)
     if connected is False:
         return False
 
@@ -49,6 +47,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     easycare: EasyCare = hass.data.get(COMPONENT_DATA)
     coordinator: EasyCareCoordinator = easycare.get_coordinator()
     await coordinator.async_config_entry_first_refresh()
+    module_coordinator: EasyCareModuleCoordinator = easycare.get_module_coordinator()
+    await module_coordinator.async_config_entry_first_refresh()
 
     for platform in PLATFORMS:
         hass.helpers.discovery.load_platform(platform, DOMAIN, {}, config)
@@ -56,7 +56,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     return True
 
 
-def connect_easycare(hass: HomeAssistant, config) -> json:
+def connect_easycare(hass: HomeAssistant, config) -> bool:
     """Connect to easycare"""
     # Read config
     username = config.get(CONF_USERNAME)

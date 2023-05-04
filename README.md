@@ -4,7 +4,7 @@
 [![release][release-badge]][release-url]
 ![downloads][downloads-badge]
 
-This is a Custom Components for [Home Assistant][home-assistant] to manage your [Waterair][waterair] Pool with the Easy-Care system. 
+This is a Custom Components for [Home Assistant][home-assistant] to manage your [Waterair][waterair] Pool with the Easy-Care system.
 
 This custom components aims to manage pool informations, lights and notifications (treatment, ph alert, ..). It will be completed by a lovelace card (work in progress).
 
@@ -30,18 +30,23 @@ easycare_waterair:
   username: your_user_name
   password: your_password
 ```
-And now restart HA again. 
+And now restart HA again.
 You will now seeing 10 new sensors :
-- easycare_pool_owner_sensor : a static sensor with owner name and address
-- easycare_pool_detail_sensor : a static sensor with pool detail (type, volume, localization, custom_picture)
-- easycare_pool_temperature_sensor: the current temperature
-- easycare_pool_last_update_temperature_sensor: the last temperature update
-- easycare_pool_ph_sensor: the current Ph value
-- easycare_pool_last_update_ph_sensor: the last ph update
-- easycare_pool_chlore_sensor: the current chlorine value
-- easycare_pool_last_update_chlorine_sensor: the last chlorine update
-- easycare_pool_notification_sensor: the last notification (for chlorine treatement) or 'None' if all is well !
-- easycare_pool_notification_date_sensor: the last notifictaion update
+- easycare_pool_owner: a static sensor with owner name and address
+- easycare_pool_detail: a static sensor with pool detail (type, volume, localization, custom_picture)
+- easycare_pool_temperature: the current temperature
+- easycare_pool_last_update_temperature: the last temperature update
+- easycare_pool_ph: the current Ph value
+- easycare_pool_last_update_ph: the last ph update
+- easycare_pool_chlore: the current chlorine value
+- easycare_pool_last_update_chlorine: the last chlorine update
+- easycare_pool_notification: the last notification (for chlorine treatement) or 'None' if all is well !
+- easycare_pool_notification_date: the last notifictaion update
+
+You will also have sensors for the pool modules :
+- easycare_module_AC1-XXX: the easycare module
+- easycare_module_BPC-XXX: the BPC to manage lights and pump
+- easycare_module_WATBOX-XXX: the waterair box
 
 And one binary sensor (easycare_connection_sensor) to known if the connection is up
 

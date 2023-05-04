@@ -16,6 +16,7 @@ from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
 from .easycare import EasyCare
+from .easycare.model.module import Module
 
 from . import (
     COMPONENT_DATA,
@@ -47,6 +48,9 @@ def setup_platform(
     sensors.append(PoolLastUpdateChlorineWithCoordinator(easycare))
     sensors.append(PoolNotificationWithCoordinator(easycare))
     sensors.append(PoolNotificationDateWithCoordinator(easycare))
+    modules = easycare.get_modules()
+    for idx, module in enumerate(modules):
+        sensors.append(PoolModuleWithCoordinator(easycare, module, idx))
 
     add_entities(sensors)
 
@@ -100,6 +104,39 @@ class StaticPoolDetail(SensorEntity):
             self._attr_available = False
         self._easycare = easycare
         _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
+
+class PoolModuleWithCoordinator(CoordinatorEntity, SensorEntity):
+    """Representation of a Sensor."""
+
+    def __init__(self, easycare: EasyCare, module: Module, idx: int) -> None:
+        """Pool Module sensor."""
+        super().__init__(easycare.get_module_coordinator())
+        self._attr_name = "EasyCare Module " + module.name
+        self._attr_icon = "mdi:cog-outline"
+        self._attr_unique_id = "easycare_module_" + module.type + "_sensor"
+
+        self._attr_native_value = module.name
+        self._attr_extra_state_attributes = {
+            "module_type": module.type,
+            "module_id": module.id,
+            "module_name": module.name,
+            "module_serial_number": module.serial_number,
+            "module_image": module.image,
+            "module_idx": idx,
+        }
+
+        self._easycare = easycare
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
+    def _handle_coordinator_update(self) -> None:
+        """Fetch new state data for the sensor.
+        This is the only method that should fetch new data for Home Assistant.
+        """
+        module = self._easycare.get_modules()[self.extra_state_attributes["module_idx"]]
+        # TODO : Update datas for battery level for exemple
+        self.async_write_ha_state()
+        _LOGGER.debug("EasyCare update sensor %s", self.name)
 
 
 class PoolTemperatureWithCoordinator(CoordinatorEntity, SensorEntity):
