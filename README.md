@@ -31,22 +31,16 @@ easycare_waterair:
   password: your_password
 ```
 And now restart HA again.
-You will now seeing 10 new sensors :
+You will now seeing 6 new sensors :
 - easycare_pool_owner: a static sensor with owner name and address
 - easycare_pool_detail: a static sensor with pool detail (type, volume, localization, custom_picture)
 - easycare_pool_temperature: the current temperature
-- easycare_pool_last_update_temperature: the last temperature update
 - easycare_pool_ph: the current Ph value
-- easycare_pool_last_update_ph: the last ph update
 - easycare_pool_chlore: the current chlorine value
-- easycare_pool_last_update_chlorine: the last chlorine update
 - easycare_pool_notification: the last notification (for chlorine treatement) or 'None' if all is well !
-- easycare_pool_notification_date: the last notifictaion update
 
-You will also have sensors for the pool modules :
-- easycare_module_AC1-XXX: the easycare module
-- easycare_module_BPC-XXX: the BPC to manage lights and pump
-- easycare_module_WATBOX-XXX: the waterair box
+You will also have sensor for the pool AC1 module :
+- easycare_module_AC1-XXX: the easycare module to manage battery status
 
 And one binary sensor (easycare_connection_sensor) to known if the connection is up
 
