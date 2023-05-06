@@ -67,7 +67,7 @@ class SpotLightSensorWithCoordinator(CoordinatorEntity, LightEntity):
 
     async def async_turn_on(self, **kwargs):
         """Turn device on."""
-        duration = kwargs.get("duration", 3600)
+        # duration = kwargs.get("duration", 3600)
         self._attr_is_on = True
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare turn on light %s", self.name)
@@ -102,7 +102,7 @@ class EscalightSensorWithCoordinator(CoordinatorEntity, LightEntity):
 
     async def async_turn_on(self, **kwargs):
         """Turn device on."""
-        duration = kwargs.get("duration", 3600)
+        # duration = kwargs.get("duration", 3600)
         self._attr_is_on = True
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare turn on light %s", self.name)

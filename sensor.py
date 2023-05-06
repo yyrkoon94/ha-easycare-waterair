@@ -131,8 +131,8 @@ class PoolModuleWithCoordinator(CoordinatorEntity, SensorEntity):
         """Fetch new state data for the sensor.
         This is the only method that should fetch new data for Home Assistant.
         """
-        module = self._easycare.get_modules()[self.extra_state_attributes["module_idx"]]
-        # TODO : Update datas for battery level for exemple
+        # module = self._easycare.get_modules()[self.extra_state_attributes["module_idx"]]
+        # Update datas for battery level for exemple
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)
 
