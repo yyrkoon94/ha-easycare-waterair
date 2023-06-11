@@ -7,6 +7,7 @@ from .model.client import Client
 from .model.pool import Pool
 from .model.metrics import Metrics
 from .model.alerts import Alerts
+from .model.treatment import Treatment
 from .model.module import Module
 from datetime import timedelta
 
@@ -29,6 +30,7 @@ class EasyCare:
         self._pool = None
         self._metrics = None
         self._alerts = None
+        self._treatment = None
         self._modules = []
         self._coordinator = EasyCareCoordinator(hass, self._cfg, self._connect)
         self._module_coordinator = EasyCareModuleCoordinator(
@@ -116,3 +118,17 @@ class EasyCare:
             else:
                 self._alerts = Alerts(user_json["pools"][self._cfg.pool_id - 1])
         return self._alerts
+
+    def get_treatment(self) -> Treatment:
+        """Return treatment Detail"""
+        user_json = self._connect.get_user_json()
+        if user_json is None:
+            if self._treatment is None:
+                self._treatment = Treatment(None)
+        else:
+            if len(user_json["pools"]) < self._cfg.pool_id:
+                if self._treatment is None:
+                    self._treatment = Treatment(None)
+            else:
+                self._treatment = Treatment(user_json["pools"][self._cfg.pool_id - 1])
+        return self._treatment

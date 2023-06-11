@@ -44,6 +44,7 @@ def setup_platform(
     sensors.append(PoolPHWithCoordinator(easycare))
     sensors.append(PoolChlorineWithCoordinator(easycare))
     sensors.append(PoolNotificationWithCoordinator(easycare))
+    sensors.append(PoolTreatmentWithCoordinator(easycare))
     modules = easycare.get_modules()
     for idx, module in enumerate(modules):
         if module.type == "lr-mas":
@@ -264,6 +265,37 @@ class PoolNotificationWithCoordinator(CoordinatorEntity, SensorEntity):
             self._attr_native_value = alerts.notification_value
             self._attr_extra_state_attributes = {
                 "last_update": alerts.notification_date
+            }
+        self.async_write_ha_state()
+        _LOGGER.debug("EasyCare update sensor %s", self.name)
+
+
+class PoolTreatmentWithCoordinator(CoordinatorEntity, SensorEntity):
+    """Representation of a Sensor."""
+
+    def __init__(self, easycare: EasyCare) -> None:
+        """Initialize pool temperature sensor."""
+        super().__init__(easycare.get_coordinator())
+        self._attr_name = "Easy-Care Pool Treatment"
+        self._attr_unique_id = "easycare_pool_treatment_sensor"
+        self._easycare = easycare
+        treatment = easycare.get_treatment()
+        if treatment.is_filled:
+            self._attr_native_value = treatment.treatment_value
+            self._attr_extra_state_attributes = {
+                "last_update": treatment.treatment_date
+            }
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
+    def _handle_coordinator_update(self) -> None:
+        """Fetch new state data for the sensor.
+        This is the only method that should fetch new data for Home Assistant.
+        """
+        treatment = self._easycare.get_treatment()
+        if treatment.is_filled:
+            self._attr_native_value = treatment.treatment_value
+            self._attr_extra_state_attributes = {
+                "last_update": treatment.treatment_date
             }
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)
