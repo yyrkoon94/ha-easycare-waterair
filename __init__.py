@@ -19,7 +19,11 @@ from homeassistant.const import (
 from homeassistant.const import Platform
 
 from .easycare import EasyCare
-from .easycare import EasyCareCoordinator, EasyCareModuleCoordinator
+from .easycare import (
+    EasyCareCoordinator,
+    EasyCareModuleCoordinator,
+    EasyCareLightCoordinator,
+)
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
@@ -27,7 +31,13 @@ _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 DOMAIN = "easycare_waterair"
 COMPONENT_DATA = "easycare_waterair-data"
 
-PLATFORMS = [Platform.BINARY_SENSOR, Platform.SENSOR, Platform.LIGHT]
+PLATFORMS = [
+    Platform.BINARY_SENSOR,
+    Platform.SENSOR,
+    Platform.LIGHT,
+    Platform.BUTTON,
+    Platform.NUMBER,
+]
 
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
@@ -49,6 +59,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     await coordinator.async_config_entry_first_refresh()
     module_coordinator: EasyCareModuleCoordinator = easycare.get_module_coordinator()
     await module_coordinator.async_config_entry_first_refresh()
+    light_coordinator: EasyCareLightCoordinator = easycare.get_light_coordinator()
+    await light_coordinator.async_config_entry_first_refresh()
 
     for platform in PLATFORMS:
         hass.helpers.discovery.load_platform(platform, DOMAIN, {}, config)

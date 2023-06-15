@@ -20,6 +20,7 @@ class Module:
         self._serial_number = module["serialNumber"]
         self._image = module["customPhoto"]
         self._number_of_inputs = module["numberOfInputs"]
+        self._battery_level = module["getBatteryLevel"]
 
     @property
     def is_filled(self) -> bool:
@@ -50,6 +51,11 @@ class Module:
     def image(self) -> str:
         """The module name"""
         return self._image
+
+    @property
+    def battery_level(self) -> str:
+        """The module bettery_level"""
+        return self._battery_level
 
     @property
     def number_of_inputs(self) -> str:

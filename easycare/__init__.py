@@ -2,7 +2,12 @@ import logging
 from homeassistant.core import HomeAssistant
 from .config import EasyCareConfig
 from .connect import Connect
-from .coordinator import EasyCareCoordinator, EasyCareModuleCoordinator
+from .coordinator import (
+    EasyCareCoordinator,
+    EasyCareModuleCoordinator,
+    EasyCareLightCoordinator,
+)
+import json
 from .model.client import Client
 from .model.pool import Pool
 from .model.metrics import Metrics
@@ -25,7 +30,8 @@ class EasyCare:
 
         # Set up the config first.
         self._cfg = EasyCareConfig(**kwargs)
-        self._connect = Connect(self._cfg)
+        self._hass = hass
+        self._connect = Connect(self._cfg, self._hass)
         self._client = None
         self._pool = None
         self._metrics = None
@@ -34,6 +40,9 @@ class EasyCare:
         self._modules = []
         self._coordinator = EasyCareCoordinator(hass, self._cfg, self._connect)
         self._module_coordinator = EasyCareModuleCoordinator(
+            hass, self._cfg, self._connect
+        )
+        self._light_coordinator = EasyCareLightCoordinator(
             hass, self._cfg, self._connect
         )
 
@@ -48,6 +57,10 @@ class EasyCare:
     def get_module_coordinator(self) -> bool:
         """Return the coordinator for module datas"""
         return self._module_coordinator
+
+    def get_light_coordinator(self) -> bool:
+        """Return the coordinator for lights datas"""
+        return self._light_coordinator
 
     def connect(self) -> bool:
         """Call the connect api for the first login"""
@@ -105,6 +118,10 @@ class EasyCare:
                 self._metrics = Metrics(user_json["pools"][self._cfg.pool_id - 1])
         return self._metrics
 
+    def get_bpc_modules(self) -> json:
+        """Return the bpc modules in json"""
+        return self._connect.get_bpc_modules()
+
     def get_alerts(self) -> Alerts:
         """Return alerts Detail"""
         user_json = self._connect.get_user_json()
@@ -132,3 +149,53 @@ class EasyCare:
             else:
                 self._treatment = Treatment(user_json["pools"][self._cfg.pool_id - 1])
         return self._treatment
+
+    def turn_on_module(self, modules, module_id) -> bool:
+        """Turn on the specified module, only 1 and 2 are available (0 is pump)"""
+        if module_id == 0:
+            return False
+
+        module_list = self._connect.get_bpc_modules()
+        # Find the module to turn on
+        if len(module_list) - 1 < module_id:
+            _LOGGER.debug("BPC Module %s doesn't exists", module_id)
+            return False
+
+        module = module_list[module_id]
+        if module["time"] != "00:00":
+            _LOGGER.debug("BPC Module %s already on for %s", module_id, module["time"])
+            return True
+
+        status = self._connect.turn_on_light(modules, module_id)
+        if status is True:
+            _LOGGER.debug("BPC Module %s turning on", module_id)
+
+        return status
+
+    def turn_off_module(self, modules, module_id) -> bool:
+        """Turn on the specified module, only 1 and 2 are available (0 is pump)"""
+        if module_id == 0:
+            return False
+
+        module_list = self._connect.get_bpc_modules()
+        # Find the module to turn on
+        if len(module_list) - 1 < module_id:
+            _LOGGER.debug("BPC Module %s doesn't exists", module_id)
+            return False
+
+        module = module_list[module_id]
+        if module["time"] == "00:00":
+            _LOGGER.debug("BPC Module %s already off", module_id)
+            return True
+
+        status = self._connect.turn_off_light(modules, module_id)
+        if status is True:
+            _LOGGER.debug("BPC Module %s turning off", module_id)
+
+        return True
+
+    def refresh_datas(self) -> None:
+        """Refreshing datas"""
+        self._connect.easycare_update_user()
+        self._connect.easycare_update_modules()
+        self._connect.easycare_update_bpc_modules()
