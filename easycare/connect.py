@@ -356,7 +356,7 @@ class Connect:
                 result.content,
             )
             return False
-        time.sleep(3)
+        time.sleep(1)
         # Now call confirmation
         attempt = 0
         result = None
@@ -456,7 +456,7 @@ class Connect:
             return False
 
         # Now call confirmation
-        time.sleep(3)
+        time.sleep(1)
         attempt = 0
         result = None
         while attempt < 1:
