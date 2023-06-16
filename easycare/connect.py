@@ -29,6 +29,7 @@ class Connect:
         self._user_json = None
         self._modules = None
         self._bpc_modules = None
+        self._call_light_change = False
 
     def login(self) -> bool:
         """Login to Easy-Care and Store the Bearer"""
@@ -218,6 +219,9 @@ class Connect:
 
     def easycare_update_bpc_modules(self) -> None:
         """Return the modules for Easy-Care"""
+        if self._call_light_change is True:
+            return None
+
         if self._is_connected is False:
             self.login()
 
@@ -302,7 +306,7 @@ class Connect:
         watbox_serial_number = None
         bpc_name = None
         bpc_id = None
-
+        self._call_light_change = True
         for module in modules:
             if module.type == "lr-bst-compact":
                 watbox_serial_number = module.serial_number
@@ -348,6 +352,7 @@ class Connect:
             time.sleep(1)
         if result is None:
             _LOGGER.error("Error calling TurnOnLight")
+            self._call_light_change = False
             return False
         if result.status_code != 200:
             _LOGGER.error(
@@ -355,8 +360,9 @@ class Connect:
                 result.status_code,
                 result.content,
             )
+            self._call_light_change = False
             return False
-        time.sleep(1)
+
         # Now call confirmation
         attempt = 0
         result = None
@@ -375,6 +381,7 @@ class Connect:
             time.sleep(1)
         if result is None:
             _LOGGER.error("Error calling ConfirmationCall")
+            self._call_light_change = False
             return False
         if result.status_code != 200:
             _LOGGER.error(
@@ -382,10 +389,13 @@ class Connect:
                 result.status_code,
                 result.content,
             )
+            self._call_light_change = False
             return False
 
         self.easycare_update_bpc_modules()
         _LOGGER.debug("turnOnLight done !")
+        self._bpc_modules = None
+        self._call_light_change = False
         return True
 
     def turn_off_light(self, modules, light_id) -> bool:
@@ -402,6 +412,7 @@ class Connect:
         watbox_serial_number = None
         bpc_name = None
         bpc_id = None
+        self._call_light_change = True
 
         for module in modules:
             if module.type == "lr-bst-compact":
@@ -446,6 +457,7 @@ class Connect:
             time.sleep(1)
         if result is None:
             _LOGGER.error("Error calling TurnOffLight")
+            self._call_light_change = False
             return False
         if result.status_code != 200:
             _LOGGER.error(
@@ -453,10 +465,10 @@ class Connect:
                 result.status_code,
                 result.content,
             )
+            self._call_light_change = False
             return False
 
         # Now call confirmation
-        time.sleep(1)
         attempt = 0
         result = None
         while attempt < 1:
@@ -474,6 +486,7 @@ class Connect:
             time.sleep(1)
         if result is None:
             _LOGGER.error("Error calling ConfirmationCall")
+            self._call_light_change = False
             return False
         if result.status_code != 200:
             _LOGGER.error(
@@ -481,8 +494,11 @@ class Connect:
                 result.status_code,
                 result.content,
             )
+            self._call_light_change = False
             return False
 
         self.easycare_update_bpc_modules()
         _LOGGER.debug("TurnOffLight done !")
+        self._bpc_modules = None
+        self._call_light_change = False
         return True
