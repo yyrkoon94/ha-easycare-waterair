@@ -17,7 +17,7 @@ class Treatment:
         self._pool = pool
 
         if "waterChemistryCorrectionProtocol" in pool:
-            if pool["waterChemistryCorrectionProtocol"] != {}:
+            if pool["waterChemistryCorrectionProtocol"] is not None:
                 date_treatment = parser.parse(
                     pool["waterChemistryCorrectionProtocol"][
                         "lastPHOutOfControlAlertSentDate"
