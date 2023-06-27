@@ -1,5 +1,6 @@
 """Class reprsenting pool data"""
 import json
+from datetime import datetime
 from dateutil import parser
 
 
@@ -18,10 +19,14 @@ class Treatment:
 
         if "waterChemistryCorrectionProtocol" in pool:
             if pool["waterChemistryCorrectionProtocol"] is not None:
-                date_treatment = parser.parse(
-                    pool["waterChemistryCorrectionProtocol"][
-                        "lastPHOutOfControlAlertSentDate"
-                    ]
+                date_treatment = (
+                    parser.parse(pool["waterChemistryCorrectionProtocol"]["date"])
+                    if "date" in pool["waterChemistryCorrectionProtocol"]
+                    else parser.parse(
+                        pool["waterChemistryCorrectionProtocol"][
+                            "lastPHOutOfControlAlertSentDate"
+                        ]
+                    )
                 )
                 self._treatment = {
                     "value": pool["waterChemistryCorrectionProtocol"][
