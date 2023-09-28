@@ -253,9 +253,18 @@ class PoolNotificationWithCoordinator(CoordinatorEntity, SensorEntity):
         self._easycare = easycare
         alerts = easycare.get_alerts()
         if alerts.is_filled:
-            self._attr_native_value = alerts.notification_value
+            self._attr_native_value = alerts.notification_value(0)
+            all_notifications = []
+            for notif in range(alerts.notification_size):
+                all_notifications.append(
+                    {
+                        "notification": alerts.notification_value(notif),
+                        "last_update": alerts.notification_date(notif),
+                    }
+                )
             self._attr_extra_state_attributes = {
-                "last_update": alerts.notification_date
+                "last_update": alerts.notification_date(0),
+                "all_notifications": all_notifications,
             }
         _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
 
@@ -265,9 +274,18 @@ class PoolNotificationWithCoordinator(CoordinatorEntity, SensorEntity):
         """
         alerts = self._easycare.get_alerts()
         if alerts.is_filled:
-            self._attr_native_value = alerts.notification_value
+            self._attr_native_value = alerts.notification_value(0)
+            all_notifications = []
+            for notif in range(alerts.notification_size):
+                all_notifications.append(
+                    {
+                        "notification": alerts.notification_value(notif),
+                        "last_update": alerts.notification_date(notif),
+                    }
+                )
             self._attr_extra_state_attributes = {
-                "last_update": alerts.notification_date
+                "last_update": alerts.notification_date(0),
+                "all_notifications": all_notifications,
             }
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)

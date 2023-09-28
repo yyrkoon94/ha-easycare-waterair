@@ -1,6 +1,5 @@
 """Class reprsenting pool data"""
 import json
-from datetime import datetime
 from dateutil import parser
 
 

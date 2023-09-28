@@ -15,22 +15,19 @@ class Alerts:
         else:
             self._is_filled = True
         self._pool = pool
-
+        self._notifications = []
         if "notifications" in pool:
             if pool["notifications"] != {}:
                 for notification in pool["notifications"]:
                     date_notification = parser.parse(
                         pool["notifications"][notification]["date"]
                     )
-                    self._notification = {
-                        "value": pool["notifications"][notification]["action"],
-                        "date": date_notification,
-                    }
-                    break
-            else:
-                self._notification = {}
-        else:
-            self._notification = {}
+                    self._notifications.append(
+                        {
+                            "value": pool["notifications"][notification]["action"],
+                            "date": date_notification,
+                        }
+                    )
 
     @property
     def is_filled(self) -> bool:
@@ -38,11 +35,22 @@ class Alerts:
         return self._is_filled
 
     @property
-    def notification_value(self) -> str:
-        """The notification value"""
-        return self._notification["value"] if "value" in self._notification else "None"
+    def notification_size(self) -> int:
+        """The number of notifications"""
+        return len(self._notifications)
 
-    @property
-    def notification_date(self) -> str:
+    def notification_value(self, notification_id) -> str:
+        """The notification value"""
+        return (
+            self._notifications[notification_id]["value"]
+            if "value" in self._notifications[notification_id]
+            else "None"
+        )
+
+    def notification_date(self, notification_id) -> str:
         """The notification date"""
-        return self._notification["date"] if "date" in self._notification else None
+        return (
+            self._notifications[notification_id]["date"]
+            if "date" in self._notifications[notification_id]
+            else None
+        )
