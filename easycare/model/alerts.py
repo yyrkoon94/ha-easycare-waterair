@@ -43,7 +43,8 @@ class Alerts:
         """The notification value"""
         return (
             self._notifications[notification_id]["value"]
-            if "value" in self._notifications[notification_id]
+            if len(self._notifications) > 0
+            and "value" in self._notifications[notification_id]
             else "None"
         )
 
@@ -51,6 +52,7 @@ class Alerts:
         """The notification date"""
         return (
             self._notifications[notification_id]["date"]
-            if "date" in self._notifications[notification_id]
+            if len(self._notifications) > 0
+            and "date" in self._notifications[notification_id]
             else None
         )
