@@ -23,11 +23,20 @@ After installing the components using HACS or manually, you have to restart Home
 At this time, the component is ready to be used.
 
 ## Configuration
-To use the component, just edit your configuration.yaml and add the following lines :
+To use the component, you need to get a token from waterair login page. 
+For that :
+- Go to this this [login page][login-waterair].
+- Put your navigator in developpement mode et click on the "Netwrok" Tab
+- Fill you login and password an clic the button to connect
+- You will see 2 request, one in red like the screenshoot below
+![Screenshot](https://raw.githubusercontent.com/yyrkoon94/ha-easycare-waterair/master/login1.png)
+- Double clic on the one in red and clic on the Payload tabs, you will see et query string with "code:" and a token value
+![Screenshot](https://raw.githubusercontent.com/yyrkoon94/ha-easycare-waterair/master/login2.png)
+- Copy the value (withour code:") and put it in HA configuration.uyaml :
+
 ```
 easycare_waterair:
-  username: your_user_name
-  password: your_password
+  token: the_token_you_copied
 ```
 Restart HA again. You will now seeing :
 
@@ -66,3 +75,4 @@ The refresh data is done every 30 minutes.
 [waterair]: https://www.waterair.com/
 [hacs]: https://hacs.xyz
 [release-url]: https://github.com/yyrkoon94/ha-easycare-waterair/releases
+[login-waterair]: https://sso.waterair.com/waterairexternb2c.onmicrosoft.com/b2c_1a_signup_signin_inter/oauth2/v2.0/authorize?response_type=code&code_challenge_method=S256&scope=https%3A%2F%2Fsso.waterair.com%2Fapi%2Fopenid%20https%3A%2F%2Fsso.waterair.com%2Fapi%2Foffline_access%20openid%20profile%20offline_access&code_challenge=nKnk64mx1G_lEG5cshhNggBm-PAf9UZnZayLNtux2Bc&redirect_uri=msauth.com.waterair.easycare%3A%2F%2Fauth&client-request-id=BDE2D6D1-8BE6-4D05-9E9B-AEADC1280CD7&client_id=6c015150-c33f-463e-89bc-6ad5614bdc15&return-client-request-id=true
