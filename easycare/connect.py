@@ -11,7 +11,7 @@ from .config import EasyCareConfig
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
-bearerstore = "/custom_components/ha-easycare-waterair/.easycarebearer"
+bearerstore = ".easycarebearer"
 
 class Connect:
     """Class is used to manage all calls to Easy-Care API."""
