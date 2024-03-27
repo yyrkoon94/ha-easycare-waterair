@@ -29,7 +29,7 @@ For that :
 - Put your navigator in developpement mode et click on the "Netwrok" Tab
 - Fill you login and password an clic the button to connect
 - You will see 2 request, one in red like the screenshoot below
-![Screenshot](https://raw.githubusercontent.com/yyrkoon94/ha-easycare-waterair/master/login1.png)
+![Screenshot](https://raw.githubusercontent.com/yyrkoon94/ha-easycare-waterair/master/Login1.png)
 - Double clic on the one in red and clic on the Payload tabs, you will see et query string with "code:" and a token value
 ![Screenshot](https://raw.githubusercontent.com/yyrkoon94/ha-easycare-waterair/master/login2.png)
 - Copy the value (withour code:") and put it in HA configuration.uyaml :
