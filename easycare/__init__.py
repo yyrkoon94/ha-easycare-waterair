@@ -20,7 +20,6 @@ _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
 SCAN_INTERVAL = timedelta(seconds=60)
 
-
 class EasyCare:
     """Entry point for all Easy-Care operations."""
 

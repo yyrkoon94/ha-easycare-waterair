@@ -6,10 +6,12 @@ import logging
 import json
 import requests
 import time
+import os.path
 from .config import EasyCareConfig
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
+bearerstore = os.getcwd()+"/config/custom_components/ha-easycare-waterair/.easycarebearer"
 
 class Connect:
     """Class is used to manage all calls to Easy-Care API."""
@@ -23,7 +25,7 @@ class Connect:
         """
         self._hass = hass
         self._config = config
-        self._bearer_timeout = 0
+        self._bearer_timeout = -1
         self._bearer = None
         self._is_connected = False
         self._user_json = None
@@ -33,10 +35,31 @@ class Connect:
 
     def login(self) -> bool:
         """Login to Easy-Care and Store the Bearer"""
+
         if self._check_bearer() is True:
             _LOGGER.debug("Bearer is defined, no need to login !")
             self._is_connected = True
             return True
+
+        if os.path.isfile(bearerstore) is True:
+            _LOGGER.debug("Bearer is store in file, try to read it")
+            f = open(bearerstore, "r")
+            self._bearer = f.readline().strip()
+            if self._bearer == "":
+                self._bearer = None
+            self._bearer_timeout = f.readline().strip()
+            if self._bearer_timeout != "":
+                self._bearer_timeout = float(self._bearer_timeout)
+            else:
+                self._bearer_timeout = -1
+            f.close()
+            if self._check_bearer() is True:
+                _LOGGER.debug("Bearer is defined in file, no need to login !")
+                self._is_connected = True
+                return True
+        else:
+            f = open(bearerstore, "x")
+            f.close()
 
         _LOGGER.debug("Bearer is expired or not set, calling login api")
         user = self._easycare_login()
@@ -47,10 +70,25 @@ class Connect:
         self._bearer = user["access_token"]
         self._bearer_timeout = time.time() + user["expires_in"]
         self._is_connected = True
+        if os.path.isfile(bearerstore) is True:
+            f = open(bearerstore, "w")
+            f.write(self._bearer)
+            f.write("\n")
+            f.write(str(self._bearer_timeout))
+            f.close()
+
         return True
+
+    def reset_bearer(self) -> None:
+        self._bearer = None
+        self._bearer_timeout = None
+        if os.path.isfile(bearerstore) is True:
+            os.remove(bearerstore)
 
     def _check_bearer(self) -> bool:
         """Check if Bearer is always valid"""
+        if self._bearer is None:
+            return None
         if time.time() > self._bearer_timeout and self._bearer_timeout != 0:
             self._bearer = None
 
@@ -59,30 +97,56 @@ class Connect:
     def _easycare_login(self) -> json:
         """Login to Easy-Care plateform"""
         if (
-            self._config.username == self._config.unset
-            or self._config.password == self._config.unset
+            self._config.token == self._config.unset
         ):
             return False
 
-        headers = {
-            "Content-Type": "application/json",
-            "User-Agent": "connected-pool-waterair/2.4.6 (iPad; iOS 16.3; Scale/2.00)",
-            "authorization": "Basic " + self._config.easycare_key,
-            "accept": "version=2.5",
+        params = {
+            "code": self._config.token,
+            "grant_type": "authorization_code",
+            "code_verifier": "w-j6efyTpo1umXD0hFZPRM8l7kD9yScwZ3E5rAHJuE4"
         }
 
         attempt = 0
         login = None
         while attempt < 1:
             attempt += 1
-            _LOGGER.debug("Login attempt #%s", attempt)
+            _LOGGER.debug("Get acces_token attempt #%s", attempt)
             login = requests.post(
-                self._config.host + "/oauth2/token",
+                "https://sso.waterair.com/waterairexternb2c.onmicrosoft.com/b2c_1a_signup_signin_inter/oauth2/v2.0/token",
+                params=params,
+                timeout=3,
+                verify=False,
+            )
+            if login is not None:
+                break
+            time.sleep(1)
+        if login is None:
+            _LOGGER.error("Authentication failed !")
+            return False
+        if login.status_code != 200:
+            _LOGGER.error(
+                "Request failed, status_code is %s and message %s",
+                login.status_code,
+                login.content,
+            )
+            return False
+
+        _LOGGER.debug("Get the access token done !")
+        access_token = json.loads(login.content)["id_token"]
+
+        headers = {
+            "authorization": "Basic NWQwMjFkYzI0NzhjMjE3MDc3MzI0NDEwOkNtVmZxNDNiZE5hUUZjWA==",
+        }
+        attempt = 0
+        login = None
+        while attempt < 1:
+            attempt += 1
+            _LOGGER.debug("Get bearer attempt #%s", attempt)
+            login = requests.post(
+                self._config.host + "/oauth2/tokenFromAzureADB2CIdToken",
                 json={
-                    "scope": "email",
-                    "password": self._config.password,
-                    "username": self._config.username,
-                    "grant_type": "password",
+                    "idToken": access_token,
                 },
                 headers=headers,
                 timeout=3,
@@ -102,7 +166,8 @@ class Connect:
             )
             return False
 
-        _LOGGER.debug("Authentication done !")
+        _LOGGER.debug("Get the bearer done !")
+
         return json.loads(login.content)
 
     def get_connection_status(self) -> bool:

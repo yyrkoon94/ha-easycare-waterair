@@ -1,4 +1,6 @@
 json_sample/
+.DS_Store
+.easycarebearer
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

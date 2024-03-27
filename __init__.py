@@ -15,6 +15,7 @@ from homeassistant.helpers.typing import ConfigType
 from homeassistant.const import (
     CONF_USERNAME,
     CONF_PASSWORD,
+    CONF_TOKEN
 )
 from homeassistant.const import Platform
 
@@ -36,7 +37,7 @@ PLATFORMS = [
     Platform.SENSOR,
     Platform.LIGHT,
     Platform.BUTTON,
-    Platform.NUMBER,
+    Platform.NUMBER
 ]
 
 
@@ -71,15 +72,13 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 def connect_easycare(hass: HomeAssistant, config) -> bool:
     """Connect to easycare"""
     # Read config
-    username = config.get(CONF_USERNAME)
-    password = config.get(CONF_PASSWORD)
+    token = config.get(CONF_TOKEN)
     pool_id = config.get("pool_id")
     easycare_key = config.get("easycare_key")
 
     easycare = EasyCare(
         hass,
-        username=username,
-        password=password,
+        token=token,
         easycare_key=easycare_key,
         pool_id=pool_id,
     )

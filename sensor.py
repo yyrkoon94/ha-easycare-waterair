@@ -79,7 +79,6 @@ class StaticPoolOwner(SensorEntity):
         self._easycare = easycare
         _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
 
-
 class StaticPoolDetail(SensorEntity):
     """Representation of a Sensor."""
 

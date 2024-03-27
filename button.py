@@ -48,3 +48,4 @@ class RefreshButton(ButtonEntity):
         """Update the current value."""
         await self._hass.async_add_executor_job(self._easycare.refresh_datas)
         _LOGGER.debug("EasyCare Refresh Button Pressed")
+
