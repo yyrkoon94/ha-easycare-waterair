@@ -77,6 +77,10 @@ class EasyCare:
         """Return the connection status for Easy-Care"""
         return self._connect.get_connection_status()
 
+    def get_bearer(self) -> bool:
+        """Return the bearer for Easy-Care or None """
+        return self._connect.get_bearer()
+
     def get_client(self) -> Client:
         """Return the Pool Owner"""
         if self._client is not None:

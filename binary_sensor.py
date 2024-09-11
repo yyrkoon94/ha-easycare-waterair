@@ -51,6 +51,9 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
             if easycare.get_connection_status()
             else "mdi:network-off-outline"
         )
+        self._attr_extra_state_attributes = {
+                "token_valid": easycare.get_bearer() is not None
+            }
         self._attr_unique_id = "easycare_connection_sensor"
         self._easycare = easycare
         _LOGGER.debug("EasyCare-Binary-Sensor: %s created", self.name)
@@ -64,6 +67,9 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
             if self._easycare.get_connection_status()
             else "mdi:network-off-outline"
         )
+        self._attr_extra_state_attributes = {
+            "token_valid": self._easycare.get_bearer() is not None
+        }
         self._attr_is_on = self._easycare.get_connection_status()
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)

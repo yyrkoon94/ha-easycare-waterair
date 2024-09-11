@@ -42,7 +42,7 @@ class EasyCareCoordinator(DataUpdateCoordinator):
         so entities can quickly look up their data.
         """
         _LOGGER.debug("Calling DataCoordinator to update data API")
-        async with timeout(10):
+        async with timeout(30):
             await self._hass.async_add_executor_job(self._connect.easycare_update_user)
 
 
@@ -75,7 +75,7 @@ class EasyCareModuleCoordinator(DataUpdateCoordinator):
         so entities can quickly look up their data.
         """
         _LOGGER.debug("Calling DataCoordinator to update data API")
-        async with timeout(10):
+        async with timeout(30):
             await self._hass.async_add_executor_job(
                 self._connect.easycare_update_modules
             )
@@ -125,7 +125,7 @@ class EasyCareLightCoordinator(DataUpdateCoordinator):
             _LOGGER.debug("Calling DataCoordinator to update light status")
             self._first_call = False
             self._call_count = 0
-            async with timeout(10):
+            async with timeout(30):
                 await self._hass.async_add_executor_job(
                     self._connect.easycare_update_bpc_modules
                 )

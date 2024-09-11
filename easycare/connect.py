@@ -109,7 +109,7 @@ class Connect:
 
         attempt = 0
         login = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("Get acces_token attempt #%s", attempt)
             login = requests.post(
@@ -118,7 +118,7 @@ class Connect:
                 timeout=3,
                 verify=False,
             )
-            if login is not None:
+            if login is not None and login.status_code == 200:
                 break
             time.sleep(1)
         if login is None:
@@ -173,6 +173,10 @@ class Connect:
     def get_connection_status(self) -> bool:
         """Return the connextion status for Easy-Care"""
         return self._is_connected
+
+    def get_bearer(self) -> bool:
+        """Return the bearer for Easy-Care"""
+        return self._bearer
 
     def get_user_json(self) -> json:
         """Return the user json for Easy-Care"""
