@@ -47,7 +47,7 @@ def setup_platform(
     sensors.append(PoolTreatmentWithCoordinator(easycare))
     modules = easycare.get_modules()
     for idx, module in enumerate(modules):
-        if module.type == "lr-mas":
+        #if module.type == "lr-mas":
             sensors.append(PoolModuleWithCoordinator(easycare, module, idx))
 
     add_entities(sensors)
