@@ -1,13 +1,13 @@
-"""Class reprsenting pool data"""
+"""Class reprsenting pool data."""
+
 import json
 
 
 class Pool:
-    """
-    Class representing a pool object
-    """
+    """Class representing a pool object."""
 
     def __init__(self, pool: json) -> None:
+        """Initilisation of the class."""
         if pool is None:
             pool = json.loads("{}")
             self._is_filled = False
@@ -17,35 +17,35 @@ class Pool:
 
     @property
     def is_filled(self) -> bool:
-        """Return True if the client object is filled"""
+        """Return True if the client object is filled."""
         return self._is_filled
 
     @property
     def model(self) -> str:
-        """The pool model"""
-        return self._pool["model"] if "model" in self._pool else "Unknown"
+        """The pool model."""
+        return self._pool.get("model", "Unknown")
 
     @property
     def volume(self) -> float:
-        """The pool volume"""
+        """The pool volume."""
         return float(self._pool["volume"]) if "volume" in self._pool else 0.0
 
     @property
     def address(self) -> str:
-        """The pool address"""
-        return self._pool["address"] if "address" in self._pool else ""
+        """The pool address."""
+        return self._pool.get("address", "")
 
     @property
     def latitude(self) -> float:
-        """The pool latitude"""
+        """The pool latitude."""
         return float(self._pool["latitude"]) if "latitude" in self._pool else 0.0
 
     @property
     def longitude(self) -> float:
-        """The pool longitude"""
+        """The pool longitude."""
         return float(self._pool["longitude"]) if "longitude" in self._pool else 0.0
 
     @property
     def custom_photo(self) -> str:
-        """The pool custom photo"""
-        return self._pool["customPhoto"] if "customPhoto" in self._pool else ""
+        """The pool custom photo."""
+        return self._pool.get("customPhoto", "")

@@ -1,26 +1,30 @@
-"""
-    This class is used to manage all calls to Easy-Care API
-"""
-from homeassistant.core import HomeAssistant
-import logging
+"""Class used to manage all calls to Easy-Care API."""
+
 import json
-import requests
+import logging
+from pathlib import Path
 import time
-import os.path
+
+import requests
+
+from homeassistant.core import HomeAssistant
+
 from .config import EasyCareConfig
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
 bearerstore = ".easycarebearer"
 
+
 class Connect:
     """Class is used to manage all calls to Easy-Care API."""
 
     def __init__(self, config: EasyCareConfig, hass: HomeAssistant) -> None:
-        """The constructor.
+        """Create the class.
 
         Args:
             config (EasyCareConfig): Configuration variables.
+            hass (HomeAssistant): The hass object
 
         """
         self._hass = hass
@@ -34,16 +38,16 @@ class Connect:
         self._call_light_change = False
 
     def login(self) -> bool:
-        """Login to Easy-Care and Store the Bearer"""
+        """Login to Easy-Care and Store the Bearer."""
 
         if self._check_bearer() is True:
             _LOGGER.debug("Bearer is defined, no need to login !")
             self._is_connected = True
             return True
 
-        if os.path.isfile(bearerstore) is True:
+        if Path(bearerstore).is_file() is True:
             _LOGGER.debug("Bearer is store in file, try to read it")
-            f = open(bearerstore, "r")
+            f = Path(bearerstore).open("r", encoding="utf-8")
             self._bearer = f.readline().strip()
             if self._bearer == "":
                 self._bearer = None
@@ -58,7 +62,7 @@ class Connect:
                 self._is_connected = True
                 return True
         else:
-            f = open(bearerstore, "x")
+            f = Path(bearerstore).open("x", encoding="utf-8")
             f.close()
 
         _LOGGER.debug("Bearer is expired or not set, calling login api")
@@ -70,8 +74,8 @@ class Connect:
         self._bearer = user["access_token"]
         self._bearer_timeout = time.time() + user["expires_in"]
         self._is_connected = True
-        if os.path.isfile(bearerstore) is True:
-            f = open(bearerstore, "w")
+        if Path(bearerstore).is_file() is True:
+            f = Path(bearerstore).open("w", encoding="utf-8")
             f.write(self._bearer)
             f.write("\n")
             f.write(str(self._bearer_timeout))
@@ -80,13 +84,14 @@ class Connect:
         return True
 
     def reset_bearer(self) -> None:
+        """Remove the bearer file."""
         self._bearer = None
         self._bearer_timeout = None
-        if os.path.isfile(bearerstore) is True:
-            os.remove(bearerstore)
+        if Path(bearerstore).is_file() is True:
+            Path(bearerstore).unlink()
 
     def _check_bearer(self) -> bool:
-        """Check if Bearer is always valid"""
+        """Check if Bearer is always valid."""
         if self._bearer is None:
             return None
         if time.time() > self._bearer_timeout and self._bearer_timeout != 0:
@@ -95,16 +100,14 @@ class Connect:
         return self._bearer is not None
 
     def _easycare_login(self) -> json:
-        """Login to Easy-Care plateform"""
-        if (
-            self._config.token == self._config.unset
-        ):
+        """Login to Easy-Care plateform."""
+        if self._config.token == self._config.unset:
             return False
 
         params = {
             "code": self._config.token,
             "grant_type": "authorization_code",
-            "code_verifier": "w-j6efyTpo1umXD0hFZPRM8l7kD9yScwZ3E5rAHJuE4"
+            "code_verifier": "w-j6efyTpo1umXD0hFZPRM8l7kD9yScwZ3E5rAHJuE4",
         }
 
         attempt = 0
@@ -171,19 +174,19 @@ class Connect:
         return json.loads(login.content)
 
     def get_connection_status(self) -> bool:
-        """Return the connextion status for Easy-Care"""
+        """Return the connextion status for Easy-Care."""
         return self._is_connected
 
     def get_bearer(self) -> bool:
-        """Return the bearer for Easy-Care"""
+        """Return the bearer for Easy-Care."""
         return self._bearer
 
     def get_user_json(self) -> json:
-        """Return the user json for Easy-Care"""
+        """Return the user json for Easy-Care."""
         return self._user_json
 
     def get_modules(self) -> json:
-        """Return the modules for Easy-Care"""
+        """Return the modules for Easy-Care."""
         if self._modules is not None:
             return self._modules
 
@@ -191,7 +194,7 @@ class Connect:
         return self._modules
 
     def get_bpc_modules(self) -> json:
-        """Return the modules for Easy-Care"""
+        """Return the modules for Easy-Care."""
         if self._bpc_modules is not None:
             return self._bpc_modules
 
@@ -199,12 +202,12 @@ class Connect:
         return self._bpc_modules
 
     def easycare_update_modules(self) -> None:
-        """Get modules detail by calling getUserWithHisModules"""
+        """Get modules detail by calling getUserWithHisModules."""
         if self._is_connected is False:
             self.login()
 
         if self._is_connected is False:
-            return None
+            return
 
         headers = {
             "Content-Type": "application/json",
@@ -229,25 +232,25 @@ class Connect:
             time.sleep(1)
         if modules is None:
             _LOGGER.error("Error calling getUserWithHisModules")
-            return None
+            return
         if modules.status_code != 200:
             _LOGGER.error(
                 "Request failed, status_code is %s and message %s",
                 modules.status_code,
                 modules.content,
             )
-            return None
+            return
         json_modules = json.loads(modules.content)
         self._modules = json_modules["modules"]
         _LOGGER.debug("getUserWithHisModules done !")
 
     def easycare_update_user(self) -> None:
-        """Get User detail by calling getUser"""
+        """Get User detail by calling getUser."""
         if self._is_connected is False:
             self.login()
 
         if self._is_connected is False:
-            return None
+            return
 
         headers = {
             "Content-Type": "application/json",
@@ -264,7 +267,7 @@ class Connect:
             user = requests.get(
                 self._config.host + "/api/getUser?attributesToPopulate%5B%5D=pools",
                 headers=headers,
-                timeout=3,
+                timeout=5,
                 verify=False,
             )
             if user is not None:
@@ -273,7 +276,7 @@ class Connect:
         if user is None:
             _LOGGER.error("Error calling getUser")
             self._is_connected = False
-            return None
+            return
         if user.status_code != 200:
             _LOGGER.error(
                 "Request failed, status_code is %s and message %s",
@@ -281,21 +284,21 @@ class Connect:
                 user.content,
             )
             self._is_connected = False
-            return None
+            return
 
         self._user_json = json.loads(user.content)
         _LOGGER.debug("GetUser done !")
 
     def easycare_update_bpc_modules(self) -> None:
-        """Return the modules for Easy-Care"""
+        """Return the modules for Easy-Care."""
         if self._call_light_change is True:
-            return None
+            return
 
         if self._is_connected is False:
             self.login()
 
         if self._is_connected is False:
-            return None
+            return
 
         watbox_serial_number = None
         bpc_name = None
@@ -333,20 +336,20 @@ class Connect:
             time.sleep(1)
         if bpc_modules is None:
             _LOGGER.error("Error calling getBPCModules")
-            return None
+            return
         if bpc_modules.status_code != 200:
             _LOGGER.error(
                 "Request failed, status_code is %s and message %s",
                 bpc_modules.status_code,
                 bpc_modules.content,
             )
-            return None
+            return
         json_modules = json.loads(bpc_modules.content)
         self._bpc_modules = json_modules["pool"]
         _LOGGER.debug("getBPCModules done !")
 
     def turn_on_light(self, modules, light_id) -> bool:
-        """Turn on the light"""
+        """Turn on the light."""
         duration = 3600
         if light_id == 1:
             # Spot duration
@@ -468,7 +471,7 @@ class Connect:
         return True
 
     def turn_off_light(self, modules, light_id) -> bool:
-        """Turn on the light"""
+        """Turn on the light."""
         if modules is None:
             return False
 

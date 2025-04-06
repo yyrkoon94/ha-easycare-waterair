@@ -1,26 +1,23 @@
 """Platform for SensorEnity integration."""
+
 from __future__ import annotations
 
 import logging
 
 from homeassistant.components.sensor import (
-    SensorEntity,
     SensorDeviceClass,
+    SensorEntity,
     SensorStateClass,
     UnitOfTemperature,
 )
-
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
+from . import COMPONENT_DATA
 from .easycare import EasyCare
 from .easycare.model.module import Module
-
-from . import (
-    COMPONENT_DATA,
-)
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
@@ -47,8 +44,8 @@ def setup_platform(
     sensors.append(PoolTreatmentWithCoordinator(easycare))
     modules = easycare.get_modules()
     for idx, module in enumerate(modules):
-        #if module.type == "lr-mas":
-            sensors.append(PoolModuleWithCoordinator(easycare, module, idx))
+        # if module.type == "lr-mas":
+        sensors.append(PoolModuleWithCoordinator(easycare, module, idx))
 
     add_entities(sensors)
 
@@ -78,6 +75,7 @@ class StaticPoolOwner(SensorEntity):
             self._attr_available = False
         self._easycare = easycare
         _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
 
 class StaticPoolDetail(SensorEntity):
     """Representation of a Sensor."""
@@ -130,6 +128,7 @@ class PoolModuleWithCoordinator(CoordinatorEntity, SensorEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         module = self._easycare.get_modules()[self.extra_state_attributes["module_idx"]]
@@ -163,6 +162,7 @@ class PoolTemperatureWithCoordinator(CoordinatorEntity, SensorEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         metrics = self._easycare.get_pool_metrics()
@@ -196,6 +196,7 @@ class PoolPHWithCoordinator(CoordinatorEntity, SensorEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         metrics = self._easycare.get_pool_metrics()
@@ -229,6 +230,7 @@ class PoolChlorineWithCoordinator(CoordinatorEntity, SensorEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         metrics = self._easycare.get_pool_metrics()
@@ -253,14 +255,13 @@ class PoolNotificationWithCoordinator(CoordinatorEntity, SensorEntity):
         alerts = easycare.get_alerts()
         if alerts.is_filled:
             self._attr_native_value = alerts.notification_value(0)
-            all_notifications = []
-            for notif in range(alerts.notification_size):
-                all_notifications.append(
-                    {
-                        "notification": alerts.notification_value(notif),
-                        "last_update": alerts.notification_date(notif),
-                    }
-                )
+            all_notifications = [
+                {
+                    "notification": alerts.notification_value(notif),
+                    "last_update": alerts.notification_date(notif),
+                }
+                for notif in range(alerts.notification_size)
+            ]
             self._attr_extra_state_attributes = {
                 "last_update": alerts.notification_date(0),
                 "all_notifications": all_notifications,
@@ -269,19 +270,19 @@ class PoolNotificationWithCoordinator(CoordinatorEntity, SensorEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         alerts = self._easycare.get_alerts()
         if alerts.is_filled:
             self._attr_native_value = alerts.notification_value(0)
-            all_notifications = []
-            for notif in range(alerts.notification_size):
-                all_notifications.append(
-                    {
-                        "notification": alerts.notification_value(notif),
-                        "last_update": alerts.notification_date(notif),
-                    }
-                )
+            all_notifications = [
+                {
+                    "notification": alerts.notification_value(notif),
+                    "last_update": alerts.notification_date(notif),
+                }
+                for notif in range(alerts.notification_size)
+            ]
             self._attr_extra_state_attributes = {
                 "last_update": alerts.notification_date(0),
                 "all_notifications": all_notifications,
@@ -309,6 +310,7 @@ class PoolTreatmentWithCoordinator(CoordinatorEntity, SensorEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         treatment = self._easycare.get_treatment()

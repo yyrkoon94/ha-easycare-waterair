@@ -1,13 +1,13 @@
-"""Class reprsenting client data"""
+"""Class reprsenting client data."""
+
 import json
 
 
 class Client:
-    """
-    Class representing a client object
-    """
+    """Class representing a client object."""
 
     def __init__(self, client: json) -> None:
+        """Initilisation of the class."""
         if client is None:
             client = json.loads("{}")
             self._is_filled = False
@@ -17,40 +17,40 @@ class Client:
 
     @property
     def is_filled(self) -> bool:
-        """Return True if the client object is filled"""
+        """Return True if the client object is filled."""
         return self._is_filled
 
     @property
     def first_name(self) -> str:
-        """The client first name"""
-        return self._client["firstName"] if "firstName" in self._client else "Unknown"
+        """Return the client first name."""
+        return self._client.get("firstName", "Unknown")
 
     @property
     def last_name(self) -> str:
-        """The client last name"""
-        return self._client["lastName"] if "lastName" in self._client else "Unknown"
+        """Return the client last name."""
+        return self._client.get("lastName", "Unknown")
 
     @property
     def address_line1(self) -> str:
-        """The client adress first line"""
-        return self._client["addressLine1"] if "addressLine1" in self._client else ""
+        """Return the client adress first line."""
+        return self._client.get("addressLine1", "")
 
     @property
     def address_line2(self) -> str:
-        """The client adress second line"""
-        return self._client["addressLine2"] if "addressLine2" in self._client else ""
+        """Return the client adress second line."""
+        return self._client.get("addressLine2", "")
 
     @property
     def postal_code(self) -> str:
-        """The client postal code"""
-        return self._client["postalCode"] if "postalCode" in self._client else ""
+        """Return the client postal code."""
+        return self._client.get("postalCode", "")
 
     @property
     def city(self) -> str:
-        """The client city"""
-        return self._client["city"] if "city" in self._client else ""
+        """Return the client city."""
+        return self._client.get("city", "")
 
     @property
     def email(self) -> str:
-        """The client postal code"""
-        return self._client["email"] if "email" in self._client else ""
+        """Return the client postal code."""
+        return self._client.get("email", "")

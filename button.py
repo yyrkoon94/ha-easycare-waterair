@@ -1,19 +1,16 @@
 """Platform for sensor integration."""
+
 from __future__ import annotations
 
 import logging
 
 from homeassistant.components.button import ButtonEntity
-
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 
+from . import COMPONENT_DATA
 from .easycare import EasyCare
-
-from . import (
-    COMPONENT_DATA,
-)
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
@@ -48,4 +45,3 @@ class RefreshButton(ButtonEntity):
         """Update the current value."""
         await self._hass.async_add_executor_job(self._easycare.refresh_datas)
         _LOGGER.debug("EasyCare Refresh Button Pressed")
-

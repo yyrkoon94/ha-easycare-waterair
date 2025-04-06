@@ -1,12 +1,12 @@
 """Example integration using DataUpdateCoordinator."""
 
+from asyncio import timeout
 from datetime import timedelta
 import logging
 
-from async_timeout import timeout
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
-from homeassistant.core import HomeAssistant
 from .config import EasyCareConfig
 from .connect import Connect
 
@@ -117,10 +117,11 @@ class EasyCareLightCoordinator(DataUpdateCoordinator):
             self._connect.get_bpc_modules
         )
         module_on = False
-        for module in bpc_modules:
-            if module["index"] != 0:
-                if module["time"] != "00:00":
-                    module_on = True
+        if bpc_modules:
+            for module in bpc_modules:
+                if module["index"] != 0:
+                    if module["time"] != "00:00":
+                        module_on = True
         if self._first_call is True or module_on is True or self._call_count == 10:
             _LOGGER.debug("Calling DataCoordinator to update light status")
             self._first_call = False

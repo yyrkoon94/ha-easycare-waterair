@@ -1,14 +1,15 @@
-"""Class reprsenting pool data"""
+"""Class reprsenting pool data."""
+
 import json
+
 from dateutil import parser
 
 
 class Alerts:
-    """
-    Class representing the pool alerts
-    """
+    """Class representing the pool alerts."""
 
     def __init__(self, pool: json) -> None:
+        """Initilisation of the class."""
         if pool is None:
             pool = json.loads("{}")
             self._is_filled = False
@@ -31,16 +32,16 @@ class Alerts:
 
     @property
     def is_filled(self) -> bool:
-        """Return True if the client object is filled"""
+        """Return True if the client object is filled."""
         return self._is_filled
 
     @property
     def notification_size(self) -> int:
-        """The number of notifications"""
+        """Get the number of notifications."""
         return len(self._notifications)
 
     def notification_value(self, notification_id) -> str:
-        """The notification value"""
+        """Get the notification value."""
         return (
             self._notifications[notification_id]["value"]
             if len(self._notifications) > 0
@@ -49,7 +50,7 @@ class Alerts:
         )
 
     def notification_date(self, notification_id) -> str:
-        """The notification date"""
+        """Get the notification date."""
         return (
             self._notifications[notification_id]["date"]
             if len(self._notifications) > 0

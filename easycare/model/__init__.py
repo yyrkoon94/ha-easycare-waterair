@@ -1,0 +1,1 @@
+"""Regrouping classes for model."""

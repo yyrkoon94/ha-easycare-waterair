@@ -1,6 +1,5 @@
-"""
-    This class is used to store all the variable used in the Easy-Care component
-"""
+"""Class used to store all the variable used in the Easy-Care component."""
+
 import logging
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
@@ -12,7 +11,7 @@ class EasyCareConfig:
     """Helper class to store EasyCare configuration varaibles."""
 
     def __init__(self, **kwargs) -> None:
-        """The constructor.
+        """Initilisation of the class.
 
         Args:
             kwargs (kwargs): Configuration options.
@@ -22,26 +21,24 @@ class EasyCareConfig:
 
     @property
     def token(self) -> str:
-        """The token used for login"""
-        return (
-            self._kw.get("token") if self._kw.get("token") is not None else UNSET
-        )
+        """The token used for login."""
+        return self._kw.get("token") if self._kw.get("token") is not None else UNSET
 
     @property
     def host(self) -> str:
-        """The waterair host"""
+        """The waterair host."""
         return (
             self._kw.get("host") if self._kw.get("host") is not None else DEFAULT_HOST
         )
 
     @property
     def pool_id(self) -> int:
-        """The waterair host"""
+        """The waterair host."""
         return (
             int(self._kw.get("pool_id")) if self._kw.get("pool_id") is not None else 1
         )
 
     @property
     def unset(self) -> str:
-        """The unset value"""
+        """The unset value."""
         return UNSET

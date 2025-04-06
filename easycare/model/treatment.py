@@ -1,14 +1,15 @@
-"""Class reprsenting pool data"""
+"""Class reprsenting pool data."""
+
 import json
+
 from dateutil import parser
 
 
 class Treatment:
-    """
-    Class representing the pool alerts
-    """
+    """Class representing the pool alerts."""
 
     def __init__(self, pool: json) -> None:
+        """Initilisation of the class."""
         if pool is None:
             pool = json.loads("{}")
             self._is_filled = False
@@ -40,15 +41,15 @@ class Treatment:
 
     @property
     def is_filled(self) -> bool:
-        """Return True if the client object is filled"""
+        """Return True if the client object is filled."""
         return self._is_filled
 
     @property
     def treatment_value(self) -> str:
-        """The notification value"""
-        return self._treatment["value"] if "value" in self._treatment else "None"
+        """The notification value."""
+        return self._treatment.get("value", "None")
 
     @property
     def treatment_date(self) -> str:
-        """The notification date"""
-        return self._treatment["date"] if "date" in self._treatment else None
+        """The notification date."""
+        return self._treatment.get("date", None)

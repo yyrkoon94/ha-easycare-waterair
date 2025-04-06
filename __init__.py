@@ -1,29 +1,23 @@
-"""
-The "hello world" custom component.
-This component implements the bare minimum that a component should implement.
-Configuration:
-To use the hello_world component you will need to add the following to your
-configuration.yaml file.
+"""Cutom Component for EasyCare by Waterair.
+
+To use the component you will need to add the following to your configuration.yaml file.
 easycare_waterair:
+  token: XXXX
 """
+
 from __future__ import annotations
-import json
+
 import logging
 
+from homeassistant.const import CONF_TOKEN, Platform
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
-from homeassistant.const import (
-    CONF_USERNAME,
-    CONF_PASSWORD,
-    CONF_TOKEN
-)
-from homeassistant.const import Platform
 
-from .easycare import EasyCare
 from .easycare import (
+    EasyCare,
     EasyCareCoordinator,
-    EasyCareModuleCoordinator,
     EasyCareLightCoordinator,
+    EasyCareModuleCoordinator,
 )
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
@@ -34,10 +28,10 @@ COMPONENT_DATA = "easycare_waterair-data"
 
 PLATFORMS = [
     Platform.BINARY_SENSOR,
-    Platform.SENSOR,
-    Platform.LIGHT,
     Platform.BUTTON,
-    Platform.NUMBER
+    Platform.LIGHT,
+    Platform.NUMBER,
+    Platform.SENSOR,
 ]
 
 
@@ -70,7 +64,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 
 def connect_easycare(hass: HomeAssistant, config) -> bool:
-    """Connect to easycare"""
+    """Connect to easycare."""
     # Read config
     token = config.get(CONF_TOKEN)
     pool_id = config.get("pool_id")
@@ -87,4 +81,5 @@ def connect_easycare(hass: HomeAssistant, config) -> bool:
     hass.data[COMPONENT_DATA] = easycare
 
     _LOGGER.debug("Calling EasyCare login")
-    return easycare.connect()
+    easycare.connect()
+    return True

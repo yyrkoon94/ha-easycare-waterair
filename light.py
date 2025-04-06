@@ -1,23 +1,17 @@
 """Platform for sensor integration."""
+
 from __future__ import annotations
 
 import logging
 
-from homeassistant.components.light import (
-    LightEntity,
-    ColorMode,
-)
-
+from homeassistant.components.light import ColorMode, LightEntity
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
+from . import COMPONENT_DATA
 from .easycare import EasyCare
-
-from . import (
-    COMPONENT_DATA,
-)
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
@@ -33,13 +27,14 @@ def setup_platform(
     easycare: EasyCare = hass.data.get(COMPONENT_DATA)
     lights = []
     modules = easycare.get_modules()
-    for module in modules:
-        if module.type == "lr-pc":
-            # This is the BPC
-            if module.number_of_inputs == 2:
-                # Other exists (escalight)
-                lights.append(EscalightSensorWithCoordinator(easycare, hass))
-            lights.append(SpotLightSensorWithCoordinator(easycare, hass))
+    if modules:
+        for module in modules:
+            if module.type == "lr-pc":
+                # This is the BPC
+                if module.number_of_inputs == 2:
+                    # Other exists (escalight)
+                    lights.append(EscalightSensorWithCoordinator(easycare, hass))
+                lights.append(SpotLightSensorWithCoordinator(easycare, hass))
 
     add_entities(lights)
 
@@ -67,6 +62,7 @@ class SpotLightSensorWithCoordinator(CoordinatorEntity, LightEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         bpc_modules = self._easycare.get_bpc_modules()
@@ -133,6 +129,7 @@ class EscalightSensorWithCoordinator(CoordinatorEntity, LightEntity):
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         bpc_modules = self._easycare.get_bpc_modules()

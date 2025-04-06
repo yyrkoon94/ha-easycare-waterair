@@ -1,23 +1,20 @@
 """Platform for sensor integration."""
+
 from __future__ import annotations
 
 import logging
 
 from homeassistant.components.binary_sensor import (
-    BinarySensorEntity,
     BinarySensorDeviceClass,
+    BinarySensorEntity,
 )
-
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 
+from . import COMPONENT_DATA
 from .easycare import EasyCare
-
-from . import (
-    COMPONENT_DATA,
-)
 
 _LOGGER = logging.getLogger("custom_components.ha-easycare-waterair")
 
@@ -52,14 +49,15 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
             else "mdi:network-off-outline"
         )
         self._attr_extra_state_attributes = {
-                "token_valid": easycare.get_bearer() is not None
-            }
+            "token_valid": easycare.get_bearer() is not None
+        }
         self._attr_unique_id = "easycare_connection_sensor"
         self._easycare = easycare
         _LOGGER.debug("EasyCare-Binary-Sensor: %s created", self.name)
 
     def _handle_coordinator_update(self) -> None:
         """Fetch new state data for the sensor.
+
         This is the only method that should fetch new data for Home Assistant.
         """
         self._attr_icon = (

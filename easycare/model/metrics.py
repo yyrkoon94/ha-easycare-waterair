@@ -1,15 +1,16 @@
-"""Class reprsenting pool data"""
-import json
+"""Class reprsenting pool data."""
+
 from datetime import datetime
+import json
+
 from dateutil import parser
 
 
 class Metrics:
-    """
-    Class representing the pool metrics
-    """
+    """Class representing the pool metrics."""
 
     def __init__(self, pool: json) -> None:
+        """Initilisation of the class."""
         if pool is None:
             pool = json.loads("{}")
             self._is_filled = False
@@ -55,59 +56,35 @@ class Metrics:
 
     @property
     def is_filled(self) -> bool:
-        """Return True if the client object is filled"""
+        """Return True if the client object is filled."""
         return self._is_filled
 
     @property
     def last_ph_measure_value(self) -> str:
-        """The ph value"""
-        return (
-            self._last_ph_measure["value"]
-            if "value" in self._last_ph_measure
-            else "Unknown"
-        )
+        """The ph value."""
+        return self._last_ph_measure.get("value", "Unknown")
 
     @property
     def last_ph_measure_date(self) -> str:
-        """The ph value"""
-        return (
-            self._last_ph_measure["date"]
-            if "date" in self._last_ph_measure
-            else "Unknown"
-        )
+        """The ph value."""
+        return self._last_ph_measure.get("date", "Unknown")
 
     @property
     def last_chlorine_measure_value(self) -> str:
-        """The ph value"""
-        return (
-            self._last_chlorine_measure["value"]
-            if "value" in self._last_chlorine_measure
-            else "Unknown"
-        )
+        """The ph value."""
+        return self._last_chlorine_measure.get("value", "Unknown")
 
     @property
     def last_chlorine_measure_date(self) -> str:
-        """The ph value"""
-        return (
-            self._last_chlorine_measure["date"]
-            if "date" in self._last_chlorine_measure
-            else "Unknown"
-        )
+        """The ph value."""
+        return self._last_chlorine_measure.get("date", "Unknown")
 
     @property
     def last_temperature_measure_value(self) -> str:
-        """The ph value"""
-        return (
-            self._last_temperature_measure["value"]
-            if "value" in self._last_temperature_measure
-            else "Unknown"
-        )
+        """The ph value."""
+        return self._last_temperature_measure.get("value", "Unknown")
 
     @property
     def last_temperature_measure_date(self) -> str:
-        """The ph value"""
-        return (
-            self._last_temperature_measure["date"]
-            if "date" in self._last_temperature_measure
-            else "Unknown"
-        )
+        """The ph value."""
+        return self._last_temperature_measure.get("date", "Unknown")
