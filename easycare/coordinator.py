@@ -117,7 +117,7 @@ class EasyCareLightCoordinator(DataUpdateCoordinator):
             self._connect.get_bpc_modules
         )
         module_on = False
-        if bpc_modules:
+        if bpc_modules is not None:
             for module in bpc_modules:
                 if module["index"] != 0:
                     if module["time"] != "00:00":

@@ -57,6 +57,7 @@ class SpotLightSensorWithCoordinator(CoordinatorEntity, LightEntity):
         else:
             self._attr_is_on = False
         self._attr_color_mode = ColorMode.ONOFF
+        self._attr_supported_color_modes = ColorMode.ONOFF
         self._attr_extra_state_attributes = {"remaining_time": module["time"]}
         _LOGGER.debug("EasyCare-Binary-Sensor: %s created", self.name)
 
@@ -124,6 +125,7 @@ class EscalightSensorWithCoordinator(CoordinatorEntity, LightEntity):
         else:
             self._attr_is_on = False
         self._attr_color_mode = ColorMode.ONOFF
+        self._attr_supported_color_modes = ColorMode.ONOFF
         self._attr_extra_state_attributes = {"remaining_time": module["time"]}
         _LOGGER.debug("EasyCare-Binary-Sensor: %s created", self.name)
 

@@ -11,6 +11,7 @@ import logging
 
 from homeassistant.const import CONF_TOKEN, Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers.discovery import load_platform
 from homeassistant.helpers.typing import ConfigType
 
 from .easycare import (
@@ -51,14 +52,15 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     # First call to API for initial datas
     easycare: EasyCare = hass.data.get(COMPONENT_DATA)
     coordinator: EasyCareCoordinator = easycare.get_coordinator()
-    await coordinator.async_config_entry_first_refresh()
+    await coordinator.async_refresh()
     module_coordinator: EasyCareModuleCoordinator = easycare.get_module_coordinator()
-    await module_coordinator.async_config_entry_first_refresh()
+    await module_coordinator.async_refresh()
     light_coordinator: EasyCareLightCoordinator = easycare.get_light_coordinator()
-    await light_coordinator.async_config_entry_first_refresh()
+    await light_coordinator.async_refresh()
 
     for platform in PLATFORMS:
-        hass.helpers.discovery.load_platform(platform, DOMAIN, {}, config)
+        load_platform(hass, platform, DOMAIN, {}, config)
+
     _LOGGER.debug("End EasyCare component initialisation")
     return True
 

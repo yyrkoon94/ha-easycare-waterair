@@ -309,6 +309,9 @@ class Connect:
             if module["type"] == "lr-pc":
                 bpc_name = module["name"][4::]
 
+        if bpc_name is None:
+            return
+
         headers = {
             "Content-Type": "application/json",
             "User-Agent": "connected-pool-waterair/2.4.6 (iPad; iOS 16.3; Scale/2.00)",
