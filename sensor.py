@@ -133,7 +133,14 @@ class PoolModuleWithCoordinator(CoordinatorEntity, SensorEntity):
         """
         module = self._easycare.get_modules()[self.extra_state_attributes["module_idx"]]
         self._attr_extra_state_attributes = {
+            "module_type": module.type,
+            "module_id": module.id,
+            "module_name": module.name,
+            "module_serial_number": module.serial_number,
+            "module_number_of_inputs": module.number_of_inputs,
+            "module_image": module.image,
             "module_battery_level": module.battery_level,
+            "module_idx": self.extra_state_attributes["module_idx"],
         }
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)

@@ -43,5 +43,6 @@ class RefreshButton(ButtonEntity):
 
     async def async_press(self) -> None:
         """Update the current value."""
-        await self._hass.async_add_executor_job(self._easycare.refresh_datas)
+        # await self._hass.async_add_executor_job(self._easycare.refresh_datas)
+        await self._easycare.refresh_datas()
         _LOGGER.debug("EasyCare Refresh Button Pressed")

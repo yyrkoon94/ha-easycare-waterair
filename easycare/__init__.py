@@ -187,8 +187,8 @@ class EasyCare:
 
         return True
 
-    def refresh_datas(self) -> None:
+    async def refresh_datas(self) -> None:
         """Refresh datas."""
-        self._connect.easycare_update_user()
-        self._connect.easycare_update_modules()
-        self._connect.easycare_update_bpc_modules()
+        await self._coordinator.async_request_refresh()
+        await self._module_coordinator.async_request_refresh()
+        await self._light_coordinator.async_request_refresh()

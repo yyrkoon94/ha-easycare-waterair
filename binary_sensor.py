@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 import logging
 
 from homeassistant.components.binary_sensor import (
@@ -49,7 +50,8 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
             else "mdi:network-off-outline"
         )
         self._attr_extra_state_attributes = {
-            "token_valid": easycare.get_bearer() is not None
+            "token_valid": easycare.get_bearer() is not None,
+            "last_update": datetime.now(),
         }
         self._attr_unique_id = "easycare_connection_sensor"
         self._easycare = easycare
@@ -66,7 +68,8 @@ class EasyCareConnectedSensorWithCoordinator(CoordinatorEntity, BinarySensorEnti
             else "mdi:network-off-outline"
         )
         self._attr_extra_state_attributes = {
-            "token_valid": self._easycare.get_bearer() is not None
+            "token_valid": self._easycare.get_bearer() is not None,
+            "last_update": datetime.now(),
         }
         self._attr_is_on = self._easycare.get_connection_status()
         self.async_write_ha_state()

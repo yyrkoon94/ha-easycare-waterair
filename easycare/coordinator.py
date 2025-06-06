@@ -41,7 +41,7 @@ class EasyCareCoordinator(DataUpdateCoordinator):
         This is the place to pre-process the data to lookup tables
         so entities can quickly look up their data.
         """
-        _LOGGER.debug("Calling DataCoordinator to update data API")
+        _LOGGER.debug("*** Calling EasyCareCoordinator to update data")
         async with timeout(30):
             await self._hass.async_add_executor_job(self._connect.easycare_update_user)
 
@@ -74,7 +74,7 @@ class EasyCareModuleCoordinator(DataUpdateCoordinator):
         This is the place to pre-process the data to lookup tables
         so entities can quickly look up their data.
         """
-        _LOGGER.debug("Calling DataCoordinator to update data API")
+        _LOGGER.debug("*** Calling EasyCareModuleCoordinator to update module data")
         async with timeout(30):
             await self._hass.async_add_executor_job(
                 self._connect.easycare_update_modules
@@ -123,7 +123,7 @@ class EasyCareLightCoordinator(DataUpdateCoordinator):
                     if module["time"] != "00:00":
                         module_on = True
         if self._first_call is True or module_on is True or self._call_count == 10:
-            _LOGGER.debug("Calling DataCoordinator to update light status")
+            _LOGGER.debug("*** Calling EasyCareLightCoordinator to update light status")
             self._first_call = False
             self._call_count = 0
             async with timeout(30):
@@ -132,5 +132,5 @@ class EasyCareLightCoordinator(DataUpdateCoordinator):
                 )
         else:
             _LOGGER.debug(
-                "Calling DataCoordinator to update light status : no light on, waiting next cycle"
+                "*** Calling DataCoordinator to update light status : no light on, waiting next cycle"
             )

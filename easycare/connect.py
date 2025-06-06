@@ -119,7 +119,6 @@ class Connect:
                 "https://sso.waterair.com/waterairexternb2c.onmicrosoft.com/b2c_1a_signup_signin_inter/oauth2/v2.0/token",
                 params=params,
                 timeout=3,
-                verify=False,
             )
             if login is not None and login.status_code == 200:
                 break
@@ -143,7 +142,7 @@ class Connect:
         }
         attempt = 0
         login = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("Get bearer attempt #%s", attempt)
             login = requests.post(
@@ -153,7 +152,6 @@ class Connect:
                 },
                 headers=headers,
                 timeout=3,
-                verify=False,
             )
             if login is not None:
                 break
@@ -218,14 +216,13 @@ class Connect:
 
         attempt = 0
         modules = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("getUserWithHisModules attempt #%s", attempt)
             modules = requests.get(
                 self._config.host + "/api/getUserWithHisModules",
                 headers=headers,
                 timeout=3,
-                verify=False,
             )
             if modules is not None:
                 break
@@ -250,6 +247,7 @@ class Connect:
             self.login()
 
         if self._is_connected is False:
+            _LOGGER.debug("EasyCare server unavailable !")
             return
 
         headers = {
@@ -261,14 +259,13 @@ class Connect:
 
         attempt = 0
         user = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("GetUser attempt #%s", attempt)
             user = requests.get(
                 self._config.host + "/api/getUser?attributesToPopulate%5B%5D=pools",
                 headers=headers,
                 timeout=5,
-                verify=False,
             )
             if user is not None:
                 break
@@ -303,6 +300,9 @@ class Connect:
         watbox_serial_number = None
         bpc_name = None
 
+        if self._modules is None:
+            return
+
         for module in self._modules:
             if module["type"] == "lr-bst-compact":
                 watbox_serial_number = module["serialNumber"]
@@ -321,7 +321,7 @@ class Connect:
 
         attempt = 0
         bpc_modules = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("getBPCModules attempt #%s", attempt)
             bpc_modules = requests.get(
@@ -332,7 +332,6 @@ class Connect:
                 + bpc_name,
                 headers=headers,
                 timeout=3,
-                verify=False,
             )
             if bpc_modules is not None:
                 break
@@ -408,7 +407,7 @@ class Connect:
 
         attempt = 0
         result = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("TurnOnLight attempt #%s", attempt)
             result = requests.post(
@@ -420,7 +419,6 @@ class Connect:
                 headers=headers,
                 json=body,
                 timeout=3,
-                verify=False,
             )
             if result is not None:
                 break
@@ -441,7 +439,7 @@ class Connect:
         # Now call confirmation
         attempt = 0
         result = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("ConfirmationCall attempt #%s", attempt)
             result = requests.post(
@@ -449,7 +447,6 @@ class Connect:
                 headers=headers,
                 json=confirm_body,
                 timeout=3,
-                verify=False,
             )
             if result is not None:
                 break
@@ -513,7 +510,7 @@ class Connect:
 
         attempt = 0
         result = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("TurnOffLight attempt #%s", attempt)
             result = requests.post(
@@ -525,7 +522,6 @@ class Connect:
                 headers=headers,
                 json=body,
                 timeout=3,
-                verify=False,
             )
             if result is not None:
                 break
@@ -546,7 +542,7 @@ class Connect:
         # Now call confirmation
         attempt = 0
         result = None
-        while attempt < 1:
+        while attempt < 3:
             attempt += 1
             _LOGGER.debug("ConfirmationCall attempt #%s", attempt)
             result = requests.post(
@@ -554,7 +550,6 @@ class Connect:
                 headers=headers,
                 json=confirm_body,
                 timeout=3,
-                verify=False,
             )
             if result is not None:
                 break
