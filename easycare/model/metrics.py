@@ -53,6 +53,20 @@ class Metrics:
                     "value": pool["status"]["lastTemperatureMeasure"]["value"],
                     "date": date_temperature,
                 }
+            if "lastPressureMeasure" in pool["status"]:
+                date_pressure = (
+                    datetime.fromtimestamp(
+                        pool["status"]["lastPressureMeasure"]["date"]
+                    )
+                    if "date" in pool["status"]["lastPressureMeasure"]
+                    else parser.parse(
+                        pool["status"]["lastPressureMeasure"]["timestamp"]
+                    )
+                )
+                self._last_pressure_measure = {
+                    "value": pool["status"]["lastPressureMeasure"]["value"],
+                    "date": date_pressure,
+                }
 
     @property
     def is_filled(self) -> bool:
@@ -66,25 +80,35 @@ class Metrics:
 
     @property
     def last_ph_measure_date(self) -> str:
-        """The ph value."""
+        """The ph date."""
         return self._last_ph_measure.get("date", "Unknown")
 
     @property
     def last_chlorine_measure_value(self) -> str:
-        """The ph value."""
+        """The chlorine value."""
         return self._last_chlorine_measure.get("value", "Unknown")
 
     @property
     def last_chlorine_measure_date(self) -> str:
-        """The ph value."""
+        """The chlorine date."""
         return self._last_chlorine_measure.get("date", "Unknown")
 
     @property
     def last_temperature_measure_value(self) -> str:
-        """The ph value."""
+        """The temperature value."""
         return self._last_temperature_measure.get("value", "Unknown")
 
     @property
     def last_temperature_measure_date(self) -> str:
-        """The ph value."""
+        """The temperature date."""
         return self._last_temperature_measure.get("date", "Unknown")
+
+    @property
+    def last_pressure_measure_value(self) -> str:
+        """The pressure value."""
+        return self._last_pressure_measure.get("value", "Unknown")
+
+    @property
+    def last_pressure_measure_date(self) -> str:
+        """The pressure date."""
+        return self._last_pressure_measure.get("date", "Unknown")

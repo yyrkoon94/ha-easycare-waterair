@@ -8,8 +8,8 @@ from homeassistant.components.sensor import (
     SensorDeviceClass,
     SensorEntity,
     SensorStateClass,
-    UnitOfTemperature,
 )
+from homeassistant.const import UnitOfPressure, UnitOfTemperature
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from homeassistant.helpers.typing import ConfigType, DiscoveryInfoType
@@ -44,7 +44,8 @@ def setup_platform(
     sensors.append(PoolTreatmentWithCoordinator(easycare))
     modules = easycare.get_modules()
     for idx, module in enumerate(modules):
-        # if module.type == "lr-mas":
+        if module.type == "lr-pr":
+            sensors.append(PoolPressureWithCoordinator(easycare))
         sensors.append(PoolModuleWithCoordinator(easycare, module, idx))
 
     add_entities(sensors)
@@ -245,6 +246,42 @@ class PoolChlorineWithCoordinator(CoordinatorEntity, SensorEntity):
             self._attr_native_value = metrics.last_chlorine_measure_value
             self._attr_extra_state_attributes = {
                 "last_update": metrics.last_chlorine_measure_date
+            }
+        self.async_write_ha_state()
+        _LOGGER.debug("EasyCare update sensor %s", self.name)
+
+
+class PoolPressureWithCoordinator(CoordinatorEntity, SensorEntity):
+    """Representation of a Sensor."""
+
+    def __init__(self, easycare: EasyCare) -> None:
+        """Initialize pool ph sensor."""
+        super().__init__(easycare.get_coordinator())
+        self._attr_name = "Easy-Care Pool Pressure"
+        self._attr_icon = "mdi:gauge"
+        self._attr_unique_id = "easycare_pool_pressure_sensor"
+        self._attr_device_class = SensorDeviceClass.PRESSURE
+        self._attr_state_class = SensorStateClass.MEASUREMENT
+        self._attr_native_unit_of_measurement = UnitOfPressure.BAR
+        self._easycare = easycare
+        metrics = easycare.get_pool_metrics()
+        if metrics.is_filled:
+            self._attr_native_value = metrics.last_pressure_measure_value
+            self._attr_extra_state_attributes = {
+                "last_update": metrics.last_pressure_measure_date
+            }
+        _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
+
+    def _handle_coordinator_update(self) -> None:
+        """Fetch new state data for the sensor.
+
+        This is the only method that should fetch new data for Home Assistant.
+        """
+        metrics = self._easycare.get_pool_metrics()
+        if metrics.is_filled:
+            self._attr_native_value = metrics.last_pressure_measure_value
+            self._attr_extra_state_attributes = {
+                "last_update": metrics.last_pressure_measure_date
             }
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)
