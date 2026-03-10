@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+import math
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
@@ -45,7 +46,7 @@ def setup_platform(
     modules = easycare.get_modules()
     for idx, module in enumerate(modules):
         if module.type == "lr-pr":
-            sensors.append(PoolPressureWithCoordinator(easycare))
+            sensors.append(PoolPressureWithCoordinator(easycare, module))
         sensors.append(PoolModuleWithCoordinator(easycare, module, idx))
 
     add_entities(sensors)
@@ -254,7 +255,7 @@ class PoolChlorineWithCoordinator(CoordinatorEntity, SensorEntity):
 class PoolPressureWithCoordinator(CoordinatorEntity, SensorEntity):
     """Representation of a Sensor."""
 
-    def __init__(self, easycare: EasyCare) -> None:
+    def __init__(self, easycare: EasyCare, module: Module) -> None:
         """Initialize pool ph sensor."""
         super().__init__(easycare.get_coordinator())
         self._attr_name = "Easy-Care Pool Pressure"
@@ -266,9 +267,23 @@ class PoolPressureWithCoordinator(CoordinatorEntity, SensorEntity):
         self._easycare = easycare
         metrics = easycare.get_pool_metrics()
         if metrics.is_filled:
-            self._attr_native_value = metrics.last_pressure_measure_value
+            self._attr_native_value = (
+                0
+                if abs(metrics.last_pressure_measure_value - module.static_pressure)
+                < 0.01
+                else (
+                    math.ceil(
+                        abs(
+                            metrics.last_pressure_measure_value - module.static_pressure
+                        )
+                        / 0.01
+                    )
+                    * 0.01
+                )
+            )
             self._attr_extra_state_attributes = {
-                "last_update": metrics.last_pressure_measure_date
+                "last_update": metrics.last_pressure_measure_date,
+                "static_pressure": module.static_pressure,
             }
         _LOGGER.debug("EasyCare-Sensor: %s created", self.name)
 
@@ -278,10 +293,22 @@ class PoolPressureWithCoordinator(CoordinatorEntity, SensorEntity):
         This is the only method that should fetch new data for Home Assistant.
         """
         metrics = self._easycare.get_pool_metrics()
+        static_pressure = self.extra_state_attributes["static_pressure"]
         if metrics.is_filled:
-            self._attr_native_value = metrics.last_pressure_measure_value
+            self._attr_native_value = (
+                0
+                if abs(metrics.last_pressure_measure_value - static_pressure) < 0.01
+                else (
+                    math.ceil(
+                        abs(metrics.last_pressure_measure_value - static_pressure)
+                        / 0.01
+                    )
+                    * 0.01
+                )
+            )
             self._attr_extra_state_attributes = {
-                "last_update": metrics.last_pressure_measure_date
+                "last_update": metrics.last_pressure_measure_date,
+                "static_pressure": static_pressure,
             }
         self.async_write_ha_state()
         _LOGGER.debug("EasyCare update sensor %s", self.name)

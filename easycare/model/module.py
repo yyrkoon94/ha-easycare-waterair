@@ -21,6 +21,11 @@ class Module:
         self._image = module["customPhoto"]
         self._number_of_inputs = module["numberOfInputs"]
         self._battery_level = module["getBatteryLevel"]
+        self._static_pressure = 0
+        if self._type == "lr-pr":
+            self._static_pressure = module["inputs"][0]["poolPressureAlertsVariables"][
+                "staticPressure"
+            ]
 
     @property
     def is_filled(self) -> bool:
@@ -61,3 +66,8 @@ class Module:
     def number_of_inputs(self) -> str:
         """The module name."""
         return self._number_of_inputs
+
+    @property
+    def static_pressure(self) -> str:
+        """The module name."""
+        return self._static_pressure
